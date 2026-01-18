@@ -3499,4 +3499,7 @@
   Output:Surfaces:List,DecayCurvesFromComponentLoadsSummary;
 
   Output:Surfaces:List,ViewFactorInfo;
+  Output:Variable,*,Site Direct Solar Radiation Rate per Area,hourly;
+  Output:Variable,*,Site Diffuse Solar Radiation Rate per Area,hourly;
+  Output:Variable,*,Zone Air System Sensible Heating Energy,hourly;
 

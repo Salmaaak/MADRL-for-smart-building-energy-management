@@ -2,59 +2,93 @@ import numpy as np
 from datetime import timedelta
 
 class OccupancyManager:
-    def __init__(self):
-        # Zones as per paper
-        self.zones = ["SPACE1-1", "SPACE2-1", "SPACE3-1", "SPACE4-1", "SPACE5-1"]
-        self.max_capacity = {z: 5 for z in self.zones} # Default
-        self.max_capacity["SPACE5-1"] = 20 # Center
-        self.max_capacity["SPACE3-1"] = 11 # Large side room
-        self.max_capacity["SPACE1-1"] = 11
-
-        # Comfort preference (Can be randomized per episode)
-        self.comfort_temp = {z: 21.0 for z in self.zones} 
-
-    def get_occupancy_state(self, zone, current_dt):
-        """Returns normalized occupancy for t, t+1h, t+2h"""
-        curr = self._sample_occ(zone, current_dt)
-        next_1 = self._sample_occ(zone, current_dt + timedelta(hours=1))
-        next_2 = self._sample_occ(zone, current_dt + timedelta(hours=2))
+    def __init__(self, zone_names=None):
+        # FIX: Accept zone_names argument to match main.py call
+        if zone_names is None:
+            self.zone_names = ["SPACE1-1", "SPACE2-1", "SPACE3-1", "SPACE4-1", "SPACE5-1"]
+        else:
+            self.zone_names = zone_names
+            
+        # Paper 5.1: "Space 5 and one side room (Space 3) to be the main office rooms"
+        self.main_offices = ["SPACE5-1", "SPACE3-1"]
         
-        return {
-            'current': curr,
-            'next_1h': next_1,
-            'next_2h': next_2
-        }
+        # Paper 5.1: "The other rooms are used as conference rooms"
+        self.conference_rooms = [z for z in self.zone_names if z not in self.main_offices]
+
+    def get_occupancy_state(self, zone_name, current_dt):
+        """
+        Returns the state vector features required by the Agent:
+        - Current relative occupancy
+        - Forecast 1 hour ahead
+        - Forecast 2 hours ahead
+        """
+        # 1. Current
+        curr = self._get_occ_at_time(zone_name, current_dt)
+        
+        # 2. Next 1h
+        dt_1h = current_dt + timedelta(hours=1)
+        nxt_1 = self._get_occ_at_time(zone_name, dt_1h)
+        
+        # 3. Next 2h
+        dt_2h = current_dt + timedelta(hours=2)
+        nxt_2 = self._get_occ_at_time(zone_name, dt_2h)
+        
+        return {'current': curr, 'next_1h': nxt_1, 'next_2h': nxt_2}
 
     def get_next_occupancy(self, current_dt):
-        """Returns dict of occupancy values for simulation actuators"""
-        return {z: self._sample_occ(z, current_dt) for z in self.zones}
+        """Returns dictionary of {zone: occ_value} for EnergyPlus simulation"""
+        occ_map = {}
+        for z in self.zone_names:
+            occ_map[z] = self._get_occ_at_time(z, current_dt)
+        return occ_map
 
-    def calculate_complaint(self, zone, current_temp, current_occ_pct):
-        # Eq 7 & 8 in Paper
-        # Complaint only if people are present
-        if current_occ_pct <= 0.01:
+    def _get_occ_at_time(self, zone, dt):
+        """Calculates deterministic occupancy based on Paper rules"""
+        hour = dt.hour
+        weekday = dt.weekday() # 0=Mon, 6=Sun
+
+        # Weekend = Empty (Paper: "except holidays without presence")
+        if weekday >= 5:
             return 0.0
+
+        # Main Offices (Fixed Schedule 8:00 am - 4:00 pm)
+        if zone in self.main_offices:
+            if 8 <= hour < 16:
+                return 1.0 # Full capacity
+            else:
+                return 0.0
+
+        # Conference Rooms (Changing occupancy)
+        # We use a deterministic hash so the "randomness" is consistent across episodes
+        if zone in self.conference_rooms:
+            # Simple pseudo-random schedule based on day/hour
+            # This ensures "changing occupancy" as per paper, but reproducible training
+            seed = weekday * 24 + hour + hash(zone)
+            np.random.seed(seed % (2**32 - 1))
+            
+            # Conference happens randomly between 9am and 5pm
+            if 9 <= hour < 17:
+                # 30% chance a conference is happening this hour
+                return 1.0 if np.random.random() < 0.3 else 0.0
+            return 0.0
+            
+        return 0.0
+
+    def calculate_complaint(self, zone, current_temp, occupancy):
+        """
+        Paper 4.3 (Eq 7 & 8):
+        - If unoccupied: 0
+        - Target is occupants mean comfort (assume 21.0 C)
+        - If |T - Target| <= 1.0: 0 (Tolerance)
+        - Else: Magnitude of difference
+        """
+        if occupancy <= 0.01:
+            return 0.0
+            
+        target_temp = 21.0 
+        diff = abs(current_temp - target_temp)
         
-        desired = self.comfort_temp[zone]
-        diff = abs(current_temp - desired)
-        
-        # Deadband of 1.0 degree
         if diff <= 1.0:
             return 0.0
+        
         return diff
-
-    def _sample_occ(self, zone, dt):
-        # Simplified Stochastic Logic based on Paper Section 5.1
-        # Space 5 & 3: 8am-4pm
-        hour = dt.hour
-        is_weekend = dt.weekday() >= 5
-        
-        if is_weekend:
-            return 0.0
-        
-        base_occ = 0.0
-        if 8 <= hour < 16:
-            base_occ = 1.0
-        
-        # Add stochastic noise or variability here if strictly following stochastic nature
-        return base_occ

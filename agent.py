@@ -3,124 +3,106 @@ import torch.nn as nn
 import torch.optim as optim
 import numpy as np
 import random
-import os
+from collections import deque
 
-class DQNetwork(nn.Module):
-    def __init__(self, input_dim, output_dim):
-        super(DQNetwork, self).__init__()
-        # [cite_start]2 Hidden Layers as per Section 4.2 of the paper [cite: 197]
-        # [cite_start]Layer Normalization is used as it reduces training time [cite: 198]
+# --- CONFIGURATION FROM PAPER TABLE 2 ---
+GAMMA = 0.9
+BATCH_SIZE = 256
+BUFFER_SIZE = 576  # Paper: "stores last 576 values (24 days)"
+LR_START = 0.8     # Paper: aggressive start
+LR_FINAL = 0.01
+EPS_START = 1.0
+EPS_FINAL = 0.05
+TARGET_UPDATE_FREQ = 2 
+
+class DDQN(nn.Module):
+    def __init__(self, input_dim, action_dim):
+        super(DDQN, self).__init__()
+        # Paper 4.2: "fully connected... two hidden layers... layer normalization"
         self.net = nn.Sequential(
-            nn.Linear(input_dim, 64),
-            nn.LayerNorm(64),
+            nn.Linear(input_dim, 256),
+            nn.LayerNorm(256),  # Critical paper requirement
             nn.ReLU(),
-            nn.Linear(64, 64),
-            nn.LayerNorm(64),
+            nn.Linear(256, 256),
+            nn.LayerNorm(256),
             nn.ReLU(),
-            nn.Linear(64, output_dim)
+            nn.Linear(256, action_dim)
         )
 
     def forward(self, x):
         return self.net(x)
 
-class SharedAgent:
-    def __init__(self, input_dim, action_dim):
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+class Agent:
+    def __init__(self, input_dim=10, action_dim=11):
+        self.action_dim = action_dim
+        self.input_dim = input_dim
         
-        # [cite_start]Shared Networks (Parameter Sharing) [cite: 12]
-        self.policy_net = DQNetwork(input_dim, action_dim).to(self.device)
-        self.target_net = DQNetwork(input_dim, action_dim).to(self.device)
+        # Networks
+        self.policy_net = DDQN(input_dim, action_dim).float()
+        self.target_net = DDQN(input_dim, action_dim).float()
         self.target_net.load_state_dict(self.policy_net.state_dict())
         self.target_net.eval()
 
-        # [cite_start]Optimizer & Hyperparameters [cite: 335, 345]
-        self.optimizer = optim.Adam(self.policy_net.parameters(), lr=1e-3)
-        self.memory = [] 
-        self.batch_size = 256
-        self.gamma = 0.9 
-        self.epsilon = 1.0
-        self.epsilon_decay = 0.98 # Adjusted for faster learning
-        self.epsilon_min = 0.05
+        self.optimizer = optim.Adam(self.policy_net.parameters(), lr=0.001) # Adam default, schedulers handled in main
+        self.memory = deque(maxlen=BUFFER_SIZE)
         
-        self.action_dim = action_dim
+        self.epsilon = EPS_START
+        self.steps_done = 0
 
-    def select_actions(self, obs_dict, eval_mode=False):
-        actions = {}
-        states = []
-        zones = []
-        
-        for z, s in obs_dict.items():
-            zones.append(z)
-            states.append(s)
-            
-        states_t = torch.FloatTensor(np.array(states)).to(self.device)
-        
+    def get_action(self, state, eval_mode=False):
+        # Epsilon-Greedy Strategy
         if not eval_mode and random.random() < self.epsilon:
-            random_acts = [random.randint(0, self.action_dim - 1) for _ in zones]
-            return dict(zip(zones, random_acts))
-
+            return random.randint(0, self.action_dim - 1)
+        
+        state_t = torch.FloatTensor(state).unsqueeze(0)
         with torch.no_grad():
-            q_values = self.policy_net(states_t)
-            best_acts = q_values.argmax(dim=1).cpu().numpy()
-            return dict(zip(zones, best_acts))
+            q_values = self.policy_net(state_t)
+            return q_values.argmax().item()
 
-    def store_transition(self, obs_dict, acts_dict, reward, next_obs_dict, done):
-        for z in obs_dict:
-            s = obs_dict[z]
-            a = acts_dict[z]
-            ns = next_obs_dict[z]
-            self.memory.append((s, a, reward, ns, done))
-        
-        if len(self.memory) > 10000:
-            self.memory.pop(0)
+    def store_transition(self, state, action, reward, next_state, done):
+        self.memory.append((state, action, reward, next_state, done))
 
-    def train(self):
-        if len(self.memory) < self.batch_size: return
-        
-        batch = random.sample(self.memory, self.batch_size)
+    def update(self):
+        if len(self.memory) < BATCH_SIZE:
+            return
+
+        batch = random.sample(self.memory, BATCH_SIZE)
         states, actions, rewards, next_states, dones = zip(*batch)
 
-        states_t = torch.FloatTensor(np.array(states)).to(self.device)
-        actions_t = torch.LongTensor(actions).unsqueeze(1).to(self.device)
-        rewards_t = torch.FloatTensor(rewards).unsqueeze(1).to(self.device)
-        next_states_t = torch.FloatTensor(np.array(next_states)).to(self.device)
-        dones_t = torch.FloatTensor(dones).unsqueeze(1).to(self.device)
+        states = torch.FloatTensor(np.array(states))
+        actions = torch.LongTensor(actions).unsqueeze(1)
+        rewards = torch.FloatTensor(rewards).unsqueeze(1)
+        next_states = torch.FloatTensor(np.array(next_states))
+        dones = torch.FloatTensor(dones).unsqueeze(1)
 
-        next_actions = self.policy_net(next_states_t).argmax(1, keepdim=True)
-        next_q_values = self.target_net(next_states_t).gather(1, next_actions)
-        
-        expected_q = rewards_t + (self.gamma * next_q_values * (1 - dones_t))
-        current_q = self.policy_net(states_t).gather(1, actions_t)
+        # --- DDQN Logic ---
+        # 1. Select action using Policy Net
+        with torch.no_grad():
+            next_actions = self.policy_net(next_states).argmax(1).unsqueeze(1)
+            # 2. Evaluate value using Target Net
+            next_q_values = self.target_net(next_states).gather(1, next_actions)
 
-        loss = nn.MSELoss()(current_q, expected_q)
+        target_q = rewards + (GAMMA * next_q_values * (1 - dones))
+        current_q = self.policy_net(states).gather(1, actions)
+
+        loss = nn.MSELoss()(current_q, target_q)
 
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
+        
+        self.steps_done += 1
+        if self.steps_done % TARGET_UPDATE_FREQ == 0:
+            self.target_net.load_state_dict(self.policy_net.state_dict())
 
-        if self.epsilon > self.epsilon_min:
-            self.epsilon *= self.epsilon_decay
+    def copy_weights_from(self, other_agent):
+        """Used for Parameter Sharing phase"""
+        self.policy_net.load_state_dict(other_agent.policy_net.state_dict())
+        self.target_net.load_state_dict(other_agent.target_net.state_dict())
 
-    def update_target_network(self):
+    def save(self, path):
+        torch.save(self.policy_net.state_dict(), path)
+
+    def load(self, path):
+        self.policy_net.load_state_dict(torch.load(path))
         self.target_net.load_state_dict(self.policy_net.state_dict())
-
-    # --- CHECKPOINTING METHODS ---
-    def save_checkpoint(self, path, episode):
-        torch.save({
-            'model_state_dict': self.policy_net.state_dict(),
-            'optimizer_state_dict': self.optimizer.state_dict(),
-            'epsilon': self.epsilon,
-            'episode': episode
-        }, path)
-
-    def load_checkpoint(self, path):
-        if not os.path.exists(path):
-            return 0 # Start from Ep 0 if no file
-        
-        checkpoint = torch.load(path)
-        self.policy_net.load_state_dict(checkpoint['model_state_dict'])
-        self.target_net.load_state_dict(checkpoint['model_state_dict'])
-        self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-        self.epsilon = checkpoint['epsilon']
-        
-        return checkpoint['episode']
