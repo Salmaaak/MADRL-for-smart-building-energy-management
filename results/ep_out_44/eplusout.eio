@@ -1,0 +1,853 @@
+Program Version,EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2026.01.18 02:59
+! <Version>, Version ID
+ Version, 24.1
+! <Timesteps per Hour>, #TimeSteps, Minutes per TimeStep {minutes}
+ Timesteps per Hour,  4, 15
+! <System Convergence Limits>, Minimum System TimeStep {minutes}, Max HVAC Iterations, Minimum Plant Iterations, Maximum Plant Iterations
+ System Convergence Limits, 1, 20, 2, 8
+! <Simulation Control>, Do Zone Sizing, Do System Sizing, Do Plant Sizing, Do Design Days, Do Weather Simulation, Do HVAC Sizing Simulation
+ Simulation Control, Yes, Yes, Yes, No, Yes, No
+! <Performance Precision Tradeoffs>, Use Coil Direct Simulation, Zone Radiant Exchange Algorithm, Override Mode, Number of Timestep In Hour, Force Euler Method, Minimum Number of Warmup Days, Force Suppress All Begin Environment Resets, Minimum System Timestep, MaxZoneTempDiff, MaxAllowedDelTemp
+ Performance Precision Tradeoffs, No, ScriptF, Normal, 4, No, 1, No, 1.0, 0.300, 2.0000E-003
+! <Output Reporting Tolerances>, Tolerance for Time Heating Setpoint Not Met, Tolerance for Zone Cooling Setpoint Not Met Time
+ Output Reporting Tolerances, 0.200, 0.200, 
+! <Site:GroundTemperature:BuildingSurface>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:BuildingSurface,  20.03,  20.03,  20.13,  20.30,  20.43,  20.52,  20.62,  20.77,  20.78,  20.55,  20.44,  20.20
+! <Site:GroundTemperature:FCfactorMethod>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:FCfactorMethod,  17.09,  14.71,  13.24,  12.80,  13.67,  15.66,  18.12,  20.54,  22.15,  22.53,  21.60,  19.64
+! <Site:GroundTemperature:Shallow>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:Shallow,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00,  13.00
+! <Site:GroundTemperature:Deep>,Jan{C},Feb{C},Mar{C},Apr{C},May{C},Jun{C},Jul{C},Aug{C},Sep{C},Oct{C},Nov{C},Dec{C}
+ Site:GroundTemperature:Deep,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00,  16.00
+! <Site:GroundReflectance>,Jan{dimensionless},Feb{dimensionless},Mar{dimensionless},Apr{dimensionless},May{dimensionless},Jun{dimensionless},Jul{dimensionless},Aug{dimensionless},Sep{dimensionless},Oct{dimensionless},Nov{dimensionless},Dec{dimensionless}
+ Site:GroundReflectance,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20
+! <Site:GroundReflectance:SnowModifier>, Normal, Daylighting {dimensionless}
+ Site:GroundReflectance:SnowModifier,   1.000,   1.000
+! <Site:GroundReflectance:Snow>,Jan{dimensionless},Feb{dimensionless},Mar{dimensionless},Apr{dimensionless},May{dimensionless},Jun{dimensionless},Jul{dimensionless},Aug{dimensionless},Sep{dimensionless},Oct{dimensionless},Nov{dimensionless},Dec{dimensionless}
+ Site:GroundReflectance:Snow,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20
+! <Site:GroundReflectance:Snow:Daylighting>,Jan{dimensionless},Feb{dimensionless},Mar{dimensionless},Apr{dimensionless},May{dimensionless},Jun{dimensionless},Jul{dimensionless},Aug{dimensionless},Sep{dimensionless},Oct{dimensionless},Nov{dimensionless},Dec{dimensionless}
+ Site:GroundReflectance:Snow:Daylighting,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20,  0.20
+! <Environment:Weather Station>,Wind Sensor Height Above Ground {m},Wind Speed Profile Exponent {},Wind Speed Profile Boundary Layer Thickness {m},Air Temperature Sensor Height Above Ground {m},Wind Speed Modifier Coefficient-Internal,Temperature Modifier Coefficient-Internal
+Environment:Weather Station,10.000,0.140,270.000,1.500,1.586,9.750E-003
+! <Site:Location>, Location Name, Latitude {N+/S- Deg}, Longitude {E+/W- Deg},  Time Zone Number {GMT+/-}, Elevation {m},  Standard Pressure at Elevation {Pa}, Standard RhoAir at Elevation
+Site:Location,Rabat-Sale.AP RK MAR SRC-TMYx WMO#=601350,34.05,-6.75,1.00,84.10,100319,1.1923
+! <Site Water Mains Temperature Information>,Calculation Method{},Water Mains Temperature Schedule Name{},Annual Average Outdoor Air Temperature{C},Maximum Difference In Monthly Average Outdoor Air Temperatures{deltaC},Fixed Default Water Mains Temperature{C}
+Site Water Mains Temperature Information,FixedDefault,NA,NA,NA,10.0
+! <Building Information>, Building Name,North Axis {deg},Terrain,  Loads Convergence Tolerance Value,Temperature Convergence Tolerance Value,  Solar Distribution,Maximum Number of Warmup Days,Minimum Number of Warmup Days
+ Building Information,Building,30.000,City,4.00000E-002,0.40000,FullExterior,25,6
+! <Inside Convection Algorithm>, Algorithm {Simple | TARP | CeilingDiffuser | AdaptiveConvectionAlgorithm}
+Inside Convection Algorithm,Simple
+! <Outside Convection Algorithm>, Algorithm {SimpleCombined | TARP | MoWitt | DOE-2 | AdaptiveConvectionAlgorithm}
+Outside Convection Algorithm,SimpleCombined
+! <Sky Radiance Distribution>, Value {Anisotropic}
+Sky Radiance Distribution,Anisotropic
+! <Zone Air Solution Algorithm>, Algorithm {ThirdOrderBackwardDifference | AnalyticalSolution | EulerMethod}, Space Heat Balance Sizing, Space Heat Balance Simulation
+ Zone Air Solution Algorithm, ThirdOrderBackwardDifference, No, No
+! <Zone Air Carbon Dioxide Balance Simulation>, Simulation {Yes/No}, Carbon Dioxide Concentration
+ Zone Air Carbon Dioxide Balance Simulation, No,N/A
+! <Zone Air Generic Contaminant Balance Simulation>, Simulation {Yes/No}, Generic Contaminant Concentration
+ Zone Air Generic Contaminant Balance Simulation, No,N/A
+! <Zone Air Mass Flow Balance Simulation>, Enforce Mass Balance, Adjust Zone Mixing and Return {AdjustMixingOnly | AdjustReturnOnly | AdjustMixingThenReturn | AdjustReturnThenMixing | None}, Adjust Zone Infiltration {AddInfiltration | AdjustInfiltration | None}, Infiltration Zones {MixingSourceZonesOnly | AllZones}
+ Zone Air Mass Flow Balance Simulation, No,N/A,N/A,N/A
+! <HVACSystemRootFindingAlgorithm>, Value {RegulaFalsi | Bisection | BisectionThenRegulaFalsi | RegulaFalsiThenBisection}
+ HVACSystemRootFindingAlgorithm, RegulaFalsi
+! <Environment:Site Atmospheric Variation>,Wind Speed Profile Exponent {},Wind Speed Profile Boundary Layer Thickness {m},Air Temperature Gradient Coefficient {K/m}
+Environment:Site Atmospheric Variation,0.330,460.000,6.500000E-003
+! <Surface Geometry>,Starting Corner,Vertex Input Direction,Coordinate System,Daylight Reference Point Coordinate System,Rectangular (Simple) Surface Coordinate System
+ Surface Geometry,UpperLeftCorner,Counterclockwise,RelativeCoordinateSystem,RelativeCoordinateSystem,RelativeToZoneOrigin
+! <Surface Heat Transfer Algorithm>, Value {CTF - ConductionTransferFunction | EMPD - MoisturePenetrationDepthConductionTransferFunction | CondFD - ConductionFiniteDifference | HAMT - CombinedHeatAndMoistureFiniteElement} - Description,Inside Surface Max Temperature Limit{C}, Surface Convection Coefficient Lower Limit {W/m2-K}, Surface Convection Coefficient Upper Limit {W/m2-K}
+Surface Heat Transfer Algorithm, CTF - ConductionTransferFunction,200,0.10,1000.0
+! <Shading Summary>, Number of Fixed Detached Shades, Number of Building Detached Shades, Number of Attached Shades
+ Shading Summary,0,0,4
+! <Zone Summary>, Number of Zones, Number of Zone Surfaces, Number of SubSurfaces
+ Zone Summary,6,46,6
+! <Zone Information>,Zone Name,North Axis {deg},Origin X-Coordinate {m},Origin Y-Coordinate {m},Origin Z-Coordinate {m},Centroid X-Coordinate {m},Centroid Y-Coordinate {m},Centroid Z-Coordinate {m},Type,Zone Multiplier,Zone List Multiplier,Minimum X {m},Maximum X {m},Minimum Y {m},Maximum Y {m},Minimum Z {m},Maximum Z {m},Ceiling Height {m},Volume {m3},Zone Inside Convection Algorithm {Simple-Detailed-CeilingDiffuser-TrombeWall},Zone Outside Convection Algorithm {Simple-Detailed-Tarp-MoWitt-DOE-2-BLAST}, Floor Area {m2},Exterior Gross Wall Area {m2},Exterior Net Wall Area {m2},Exterior Window Area {m2}, Number of Surfaces, Number of SubSurfaces, Number of Shading SubSurfaces,  Part of Total Building Area
+ Zone Information, PLENUM-1,0.0,0.00,0.00,0.00,17.01,-1.04,2.70,1,1,1,0.00,34.01,-15.25,13.16,2.40,3.00,0.61,283.20,Simple,Simple,463.60,54.84,54.84,0.00,10,0,0,Yes
+ Zone Information, SPACE1-1,0.0,0.00,0.00,0.00,14.06,-6.15,1.20,1,1,1,0.00,26.41,-15.25,1.35,0.00,2.40,2.44,239.25,Simple,Simple,99.16,73.20,51.39,21.81,6,2,4,Yes
+ Zone Information, SPACE2-1,0.0,0.00,0.00,0.00,28.88,-7.88,1.20,1,1,1,25.06,34.01,-15.25,-2.09,0.00,2.40,2.44,103.31,Simple,Simple,42.74,36.48,27.36,9.12,6,1,0,Yes
+ Zone Information, SPACE3-1,0.0,0.00,0.00,0.00,19.98,4.10,1.20,1,1,1,7.60,34.01,-3.35,13.16,0.00,2.40,2.44,239.25,Simple,Simple,96.48,73.20,52.35,20.85,6,2,0,Yes
+ Zone Information, SPACE4-1,0.0,0.00,0.00,0.00,5.15,5.82,1.20,1,1,1,0.00,9.00,0.00,13.16,0.00,2.40,2.44,103.31,Simple,Simple,42.74,36.48,27.36,9.12,6,1,0,Yes
+ Zone Information, SPACE5-1,0.0,0.00,0.00,0.00,17.03,-1.00,1.20,1,1,1,5.05,29.01,-10.20,8.20,0.00,2.40,2.44,447.68,Simple,Simple,182.49,0.00,0.00,0.00,6,0,0,Yes
+! <Solar View Factor Information>
+! <Solar View Factor - Zone/Enclosure Information>,Zone/Enclosure Name,Number of Surfaces
+! <Solar View Factor - Surface Information>,Surface Name,Surface Class,Area {m2},Azimuth,Tilt,Solar Absorbtance,#Sides,Vertices
+! <Solar View Factor / Interchange Type>,Surface Name(s)
+! <Solar View Factor>,Surface Name,Surface Class,Row Sum,View Factors for each Surface
+Solar View Factor - Zone/Enclosure Information,PLENUM-1,10
+Solar View Factor - Surface Information,WALL-1PF,Wall,18.3000,210.0000,90.0000,0.7500,4,0.0000,0.0000,3.0000,0.0000,0.0000,2.4000,26.4138,-15.2500,2.4000,26.4138,-15.2500,3.0000
+Solar View Factor - Surface Information,WALL-1PR,Wall,9.1200,120.0000,90.0000,0.7500,4,26.4138,-15.2500,3.0000,26.4138,-15.2500,2.4000,34.0138,-2.0864,2.4000,34.0138,-2.0864,3.0000
+Solar View Factor - Surface Information,WALL-1PB,Wall,18.3000,30.0000,90.0000,0.7500,4,34.0138,-2.0864,3.0000,34.0138,-2.0864,2.4000,7.6000,13.1636,2.4000,7.6000,13.1636,3.0000
+Solar View Factor - Surface Information,WALL-1PL,Wall,9.1200,300.0000,90.0000,0.7500,4,7.6000,13.1636,3.0000,7.6000,13.1636,2.4000,0.0000,0.0000,2.4000,0.0000,0.0000,3.0000
+Solar View Factor - Surface Information,C1-1P,Floor,99.1600,30.0000,180.0000,0.6500,4,25.0595,-10.1957,2.4000,26.4138,-15.2500,2.4000,0.0000,0.0000,2.4000,5.0543,1.3543,2.4000
+Solar View Factor - Surface Information,C2-1P,Floor,42.7350,300.0000,180.0000,0.6500,4,29.0095,-3.3541,2.4000,34.0138,-2.0864,2.4000,26.4138,-15.2500,2.4000,25.0595,-10.1957,2.4000
+Solar View Factor - Surface Information,C3-1P,Floor,96.4800,74.2152,180.0000,0.6500,4,29.0095,-3.3541,2.4000,9.0043,8.1959,2.4000,7.6000,13.1636,2.4000,34.0138,-2.0864,2.4000
+Solar View Factor - Surface Information,C4-1P,Floor,42.7350,120.0000,180.0000,0.6500,4,5.0543,1.3543,2.4000,0.0000,0.0000,2.4000,7.6000,13.1636,2.4000,9.0043,8.1959,2.4000
+Solar View Factor - Surface Information,C5-1P,Floor,182.4900,30.0000,180.0000,0.6500,4,29.0095,-3.3541,2.4000,25.0595,-10.1957,2.4000,5.0543,1.3543,2.4000,9.0043,8.1959,2.4000
+Solar View Factor - Surface Information,TOP-1,Roof,463.6000,210.0000,0.0000,0.7800,4,7.6000,13.1636,3.0000,0.0000,0.0000,3.0000,26.4138,-15.2500,3.0000,34.0138,-2.0864,3.0000
+Approximate or User Input Solar ViewFactors,To Surface,Surface Class,RowSum,WALL-1PF,WALL-1PR,WALL-1PB,WALL-1PL,C1-1P,C2-1P,C3-1P,C4-1P,C5-1P,TOP-1
+Solar View Factor,WALL-1PF,Wall,1.0000,0.0000,9.4631E-003,1.8989E-002,9.4631E-003,0.1029,4.4343E-002,0.1001,4.4343E-002,0.1894,0.4810
+Solar View Factor,WALL-1PR,Wall,1.0000,1.8809E-002,0.0000,1.8809E-002,9.3738E-003,0.1019,4.3924E-002,9.9165E-002,4.3924E-002,0.1876,0.4765
+Solar View Factor,WALL-1PB,Wall,1.0000,1.8989E-002,9.4631E-003,0.0000,9.4631E-003,0.1029,4.4343E-002,0.1001,4.4343E-002,0.1894,0.4810
+Solar View Factor,WALL-1PL,Wall,1.0000,1.8809E-002,9.3738E-003,1.8809E-002,0.0000,0.1019,4.3924E-002,9.9165E-002,4.3924E-002,0.1876,0.4765
+Solar View Factor,C1-1P,Floor,1.0000,3.5298E-002,1.7591E-002,3.5298E-002,1.7591E-002,0.0000,0.0000,0.0000,0.0000,0.0000,0.8942
+Solar View Factor,C2-1P,Floor,1.0000,3.5298E-002,1.7591E-002,3.5298E-002,1.7591E-002,0.0000,0.0000,0.0000,0.0000,0.0000,0.8942
+Solar View Factor,C3-1P,Floor,1.0000,3.5298E-002,1.7591E-002,3.5298E-002,1.7591E-002,0.0000,0.0000,0.0000,0.0000,0.0000,0.8942
+Solar View Factor,C4-1P,Floor,1.0000,3.5298E-002,1.7591E-002,3.5298E-002,1.7591E-002,0.0000,0.0000,0.0000,0.0000,0.0000,0.8942
+Solar View Factor,C5-1P,Floor,1.0000,3.5298E-002,1.7591E-002,3.5298E-002,1.7591E-002,0.0000,0.0000,0.0000,0.0000,0.0000,0.8942
+Solar View Factor,TOP-1,Roof,1.0000,3.5298E-002,1.7591E-002,3.5298E-002,1.7591E-002,0.1913,8.2430E-002,0.1861,8.2430E-002,0.3520,0.0000
+Final Solar ViewFactors,To Surface,Surface Class,RowSum,WALL-1PF,WALL-1PR,WALL-1PB,WALL-1PL,C1-1P,C2-1P,C3-1P,C4-1P,C5-1P,TOP-1
+Solar View Factor,WALL-1PF,Wall,1.0002,0.0000,4.3376E-003,8.7573E-003,4.3376E-003,0.1051,4.5295E-002,0.1023,4.5295E-002,0.1934,0.4914
+Solar View Factor,WALL-1PR,Wall,1.0002,8.7036E-003,0.0000,8.7036E-003,4.3109E-003,0.1046,4.5097E-002,0.1018,4.5097E-002,0.1926,0.4892
+Solar View Factor,WALL-1PB,Wall,1.0002,8.7573E-003,4.3376E-003,0.0000,4.3376E-003,0.1051,4.5295E-002,0.1023,4.5295E-002,0.1934,0.4914
+Solar View Factor,WALL-1PL,Wall,1.0002,8.7036E-003,4.3109E-003,8.7036E-003,0.0000,0.1046,4.5097E-002,0.1018,4.5097E-002,0.1926,0.4892
+Solar View Factor,C1-1P,Floor,1.0000,1.9396E-002,9.6240E-003,1.9396E-002,9.6240E-003,0.0000,0.0000,0.0000,0.0000,0.0000,0.9419
+Solar View Factor,C2-1P,Floor,1.0000,1.9396E-002,9.6240E-003,1.9396E-002,9.6240E-003,0.0000,0.0000,0.0000,0.0000,0.0000,0.9419
+Solar View Factor,C3-1P,Floor,1.0000,1.9396E-002,9.6240E-003,1.9396E-002,9.6240E-003,0.0000,0.0000,0.0000,0.0000,0.0000,0.9419
+Solar View Factor,C4-1P,Floor,1.0000,1.9396E-002,9.6240E-003,1.9396E-002,9.6240E-003,0.0000,0.0000,0.0000,0.0000,0.0000,0.9419
+Solar View Factor,C5-1P,Floor,1.0000,1.9396E-002,9.6240E-003,1.9396E-002,9.6240E-003,0.0000,0.0000,0.0000,0.0000,0.0000,0.9419
+Solar View Factor,TOP-1,Roof,1.0000,1.9396E-002,9.6240E-003,1.9396E-002,9.6240E-003,0.2015,8.6830E-002,0.1960,8.6830E-002,0.3708,0.0000
+Solar View Factor - Zone/Enclosure Information,SPACE1-1,8
+Solar View Factor - Surface Information,FRONT-1,Wall,51.3900,210.0000,90.0000,0.7500,4,0.0000,0.0000,2.4000,0.0000,0.0000,0.0000,26.4138,-15.2500,0.0000,26.4138,-15.2500,2.4000
+Solar View Factor - Surface Information,WF-1,Window,16.5600,210.0000,90.0000,0.0000,4,2.5981,-1.5000,2.1000,2.5981,-1.5000,0.9000,14.5492,-8.4000,0.9000,14.5492,-8.4000,2.1000
+Solar View Factor - Surface Information,DF-1,Window,5.2500,210.0000,90.0000,0.0000,4,18.4463,-10.6500,2.1000,18.4463,-10.6500,0.0000,20.6114,-11.9000,0.0000,20.6114,-11.9000,2.1000
+Solar View Factor - Surface Information,SB12,Wall,12.5582,75.0000,90.0000,0.7500,4,26.4138,-15.2500,2.4000,26.4138,-15.2500,0.0000,25.0595,-10.1957,0.0000,25.0595,-10.1957,2.4000
+Solar View Factor - Surface Information,SB14,Wall,12.5582,345.0000,90.0000,0.7500,4,5.0543,1.3543,2.4000,5.0543,1.3543,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,2.4000
+Solar View Factor - Surface Information,SB15,Wall,55.4400,30.0000,90.0000,0.7500,4,25.0595,-10.1957,2.4000,25.0595,-10.1957,0.0000,5.0543,1.3543,0.0000,5.0543,1.3543,2.4000
+Solar View Factor - Surface Information,F1-1,Floor,99.1600,30.0000,180.0000,0.6500,4,25.0595,-10.1957,0.0000,26.4138,-15.2500,0.0000,0.0000,0.0000,0.0000,5.0543,1.3543,0.0000
+Solar View Factor - Surface Information,C1-1,Roof,99.1600,210.0000,0.0000,0.6500,4,5.0543,1.3543,2.4000,0.0000,0.0000,2.4000,26.4138,-15.2500,2.4000,25.0595,-10.1957,2.4000
+Approximate or User Input Solar ViewFactors,To Surface,Surface Class,RowSum,FRONT-1,WF-1,DF-1,SB12,SB14,SB15,F1-1,C1-1
+Solar View Factor,FRONT-1,Wall,1.0000,0.0000,0.0000,0.0000,4.5031E-002,4.5031E-002,0.1988,0.3556,0.3556
+Solar View Factor,WF-1,Window,1.0000,0.0000,0.0000,0.0000,4.5031E-002,4.5031E-002,0.1988,0.3556,0.3556
+Solar View Factor,DF-1,Window,1.0000,0.0000,0.0000,0.0000,4.5031E-002,4.5031E-002,0.1988,0.3556,0.3556
+Solar View Factor,SB12,Wall,1.0000,0.1514,4.8775E-002,1.5463E-002,0.0000,3.6988E-002,0.1633,0.2921,0.2921
+Solar View Factor,SB14,Wall,1.0000,0.1514,4.8775E-002,1.5463E-002,3.6988E-002,0.0000,0.1633,0.2921,0.2921
+Solar View Factor,SB15,Wall,1.0000,0.1732,5.5826E-002,1.7698E-002,4.2335E-002,4.2335E-002,0.0000,0.3343,0.3343
+Solar View Factor,F1-1,Floor,1.0000,0.2032,6.5476E-002,2.0758E-002,4.9654E-002,4.9654E-002,0.2192,0.0000,0.3921
+Solar View Factor,C1-1,Roof,1.0000,0.2032,6.5476E-002,2.0758E-002,4.9654E-002,4.9654E-002,0.2192,0.3921,0.0000
+Final Solar ViewFactors,To Surface,Surface Class,RowSum,FRONT-1,WF-1,DF-1,SB12,SB14,SB15,F1-1,C1-1
+Solar View Factor,FRONT-1,Wall,1.0003,0.0000,0.0000,0.0000,3.4233E-002,3.4233E-002,0.1708,0.3805,0.3805
+Solar View Factor,WF-1,Window,1.0003,0.0000,0.0000,0.0000,3.4233E-002,3.4233E-002,0.1708,0.3805,0.3805
+Solar View Factor,DF-1,Window,1.0003,0.0000,0.0000,0.0000,3.4233E-002,3.4233E-002,0.1708,0.3805,0.3805
+Solar View Factor,SB12,Wall,1.0001,0.1401,4.5142E-002,1.4311E-002,0.0000,2.7867E-002,0.1403,0.3162,0.3162
+Solar View Factor,SB14,Wall,1.0001,0.1401,4.5142E-002,1.4311E-002,2.7867E-002,0.0000,0.1403,0.3162,0.3162
+Solar View Factor,SB15,Wall,1.0002,0.1583,5.1012E-002,1.6172E-002,3.1774E-002,3.1774E-002,0.0000,0.3556,0.3556
+Solar View Factor,F1-1,Floor,0.9998,0.1972,6.3549E-002,2.0147E-002,4.0049E-002,4.0049E-002,0.1988,0.0000,0.4400
+Solar View Factor,C1-1,Roof,0.9998,0.1972,6.3549E-002,2.0147E-002,4.0049E-002,4.0049E-002,0.1988,0.4400,0.0000
+Solar View Factor - Zone/Enclosure Information,SPACE2-1,7
+Solar View Factor - Surface Information,RIGHT-1,Wall,27.3600,120.0000,90.0000,0.7500,4,26.4138,-15.2500,2.4000,26.4138,-15.2500,0.0000,34.0138,-2.0864,0.0000,34.0138,-2.0864,2.4000
+Solar View Factor - Surface Information,WR-1,Window,9.1200,120.0000,90.0000,0.0000,4,28.3138,-11.9591,2.1000,28.3138,-11.9591,0.9000,32.1138,-5.3773,0.9000,32.1138,-5.3773,2.1000
+Solar View Factor - Surface Information,SB21,Wall,12.5582,255.0000,90.0000,0.7500,4,25.0595,-10.1957,2.4000,25.0595,-10.1957,0.0000,26.4138,-15.2500,0.0000,26.4138,-15.2500,2.4000
+Solar View Factor - Surface Information,SB23,Wall,12.3897,345.7848,90.0000,0.7500,4,34.0138,-2.0864,2.4000,34.0138,-2.0864,0.0000,29.0095,-3.3541,0.0000,29.0095,-3.3541,2.4000
+Solar View Factor - Surface Information,SB25,Wall,18.9600,300.0000,90.0000,0.7500,4,29.0095,-3.3541,2.4000,29.0095,-3.3541,0.0000,25.0595,-10.1957,0.0000,25.0595,-10.1957,2.4000
+Solar View Factor - Surface Information,F2-1,Floor,42.7350,300.0000,180.0000,0.6500,4,29.0095,-3.3541,0.0000,34.0138,-2.0864,0.0000,26.4138,-15.2500,0.0000,25.0595,-10.1957,0.0000
+Solar View Factor - Surface Information,C2-1,Roof,42.7350,120.0000,0.0000,0.6500,4,25.0595,-10.1957,2.4000,26.4138,-15.2500,2.4000,34.0138,-2.0864,2.4000,29.0095,-3.3541,2.4000
+Approximate or User Input Solar ViewFactors,To Surface,Surface Class,RowSum,RIGHT-1,WR-1,SB21,SB23,SB25,F2-1,C2-1
+Solar View Factor,RIGHT-1,Wall,1.0000,0.0000,0.0000,9.7066E-002,9.5763E-002,0.1465,0.3303,0.3303
+Solar View Factor,WR-1,Window,1.0000,0.0000,0.0000,9.7066E-002,9.5763E-002,0.1465,0.3303,0.3303
+Solar View Factor,SB21,Wall,1.0000,0.1785,5.9491E-002,0.0000,8.0820E-002,0.1237,0.2788,0.2788
+Solar View Factor,SB23,Wall,1.0000,0.1783,5.9426E-002,8.1829E-002,0.0000,0.1235,0.2785,0.2785
+Solar View Factor,SB25,Wall,1.0000,0.1863,6.2084E-002,8.5489E-002,8.4342E-002,0.0000,0.2909,0.2909
+Solar View Factor,F2-1,Floor,1.0000,0.2222,7.4072E-002,0.1020,0.1006,0.1540,0.0000,0.3471
+Solar View Factor,C2-1,Roof,1.0000,0.2222,7.4072E-002,0.1020,0.1006,0.1540,0.3471,0.0000
+Final Solar ViewFactors,To Surface,Surface Class,RowSum,RIGHT-1,WR-1,SB21,SB23,SB25,F2-1,C2-1
+Solar View Factor,RIGHT-1,Wall,1.0002,0.0000,0.0000,8.0758E-002,7.9598E-002,0.1268,0.3565,0.3565
+Solar View Factor,WR-1,Window,1.0002,0.0000,0.0000,8.0758E-002,7.9598E-002,0.1268,0.3565,0.3565
+Solar View Factor,SB21,Wall,1.0002,0.1759,5.8648E-002,0.0000,6.5543E-002,0.1047,0.2977,0.2977
+Solar View Factor,SB23,Wall,1.0002,0.1758,5.8591E-002,6.6434E-002,0.0000,0.1046,0.2974,0.2974
+Solar View Factor,SB25,Wall,1.0002,0.1830,6.0985E-002,6.9327E-002,6.8327E-002,0.0000,0.3093,0.3093
+Solar View Factor,F2-1,Floor,0.9998,0.2283,7.6089E-002,8.7482E-002,8.6227E-002,0.1372,0.0000,0.3845
+Solar View Factor,C2-1,Roof,0.9998,0.2283,7.6089E-002,8.7482E-002,8.6227E-002,0.1372,0.3845,0.0000
+Solar View Factor - Zone/Enclosure Information,SPACE3-1,8
+Solar View Factor - Surface Information,BACK-1,Wall,52.3500,30.0000,90.0000,0.7500,4,34.0138,-2.0864,2.4000,34.0138,-2.0864,0.0000,7.6000,13.1636,0.0000,7.6000,13.1636,2.4000
+Solar View Factor - Surface Information,WB-1,Window,16.4400,30.0000,90.0000,0.0000,4,31.3291,-0.5364,2.1000,31.3291,-0.5364,0.9000,19.4645,6.3136,0.9000,19.4645,6.3136,2.1000
+Solar View Factor - Surface Information,DB-1,Window,4.4100,30.0000,90.0000,0.0000,4,15.4808,8.6136,2.1000,15.4808,8.6136,0.0000,13.6622,9.6636,0.0000,13.6622,9.6636,2.1000
+Solar View Factor - Surface Information,SB32,Wall,12.3897,165.7848,90.0000,0.7500,4,29.0095,-3.3541,2.4000,29.0095,-3.3541,0.0000,34.0138,-2.0864,0.0000,34.0138,-2.0864,2.4000
+Solar View Factor - Surface Information,SB34,Wall,12.3897,254.2152,90.0000,0.7500,4,7.6000,13.1636,2.4000,7.6000,13.1636,0.0000,9.0043,8.1959,0.0000,9.0043,8.1959,2.4000
+Solar View Factor - Surface Information,SB35,Wall,55.4400,210.0000,90.0000,0.7500,4,9.0043,8.1959,2.4000,9.0043,8.1959,0.0000,29.0095,-3.3541,0.0000,29.0095,-3.3541,2.4000
+Solar View Factor - Surface Information,F3-1,Floor,96.4800,74.2152,180.0000,0.6500,4,29.0095,-3.3541,0.0000,9.0043,8.1959,0.0000,7.6000,13.1636,0.0000,34.0138,-2.0864,0.0000
+Solar View Factor - Surface Information,C3-1,Roof,96.4800,254.2152,0.0000,0.6500,4,34.0138,-2.0864,2.4000,7.6000,13.1636,2.4000,9.0043,8.1959,2.4000,29.0095,-3.3541,2.4000
+Approximate or User Input Solar ViewFactors,To Surface,Surface Class,RowSum,BACK-1,WB-1,DB-1,SB32,SB34,SB35,F3-1,C3-1
+Solar View Factor,BACK-1,Wall,1.0000,0.0000,0.0000,0.0000,4.5354E-002,4.5354E-002,0.2029,0.3532,0.3532
+Solar View Factor,WB-1,Window,1.0000,0.0000,0.0000,0.0000,4.5354E-002,4.5354E-002,0.2029,0.3532,0.3532
+Solar View Factor,DB-1,Window,1.0000,0.0000,0.0000,0.0000,4.5354E-002,4.5354E-002,0.2029,0.3532,0.3532
+Solar View Factor,SB32,Wall,1.0000,0.1567,4.9223E-002,1.3204E-002,0.0000,3.7096E-002,0.1660,0.2889,0.2889
+Solar View Factor,SB34,Wall,1.0000,0.1567,4.9223E-002,1.3204E-002,3.7096E-002,0.0000,0.1660,0.2889,0.2889
+Solar View Factor,SB35,Wall,1.0000,0.1799,5.6507E-002,1.5158E-002,4.2585E-002,4.2585E-002,0.0000,0.3316,0.3316
+Solar View Factor,F3-1,Floor,1.0000,0.2095,6.5786E-002,1.7647E-002,4.9579E-002,4.9579E-002,0.2218,0.0000,0.3861
+Solar View Factor,C3-1,Roof,1.0000,0.2095,6.5786E-002,1.7647E-002,4.9579E-002,4.9579E-002,0.2218,0.3861,0.0000
+Final Solar ViewFactors,To Surface,Surface Class,RowSum,BACK-1,WB-1,DB-1,SB32,SB34,SB35,F3-1,C3-1
+Solar View Factor,BACK-1,Wall,1.0003,0.0000,0.0000,0.0000,3.4682E-002,3.4682E-002,0.1760,0.3775,0.3775
+Solar View Factor,WB-1,Window,1.0003,0.0000,0.0000,0.0000,3.4682E-002,3.4682E-002,0.1760,0.3775,0.3775
+Solar View Factor,DB-1,Window,1.0003,0.0000,0.0000,0.0000,3.4682E-002,3.4682E-002,0.1760,0.3775,0.3775
+Solar View Factor,SB32,Wall,1.0001,0.1465,4.6020E-002,1.2345E-002,0.0000,2.8053E-002,0.1437,0.3117,0.3117
+Solar View Factor,SB34,Wall,1.0001,0.1465,4.6020E-002,1.2345E-002,2.8053E-002,0.0000,0.1437,0.3117,0.3117
+Solar View Factor,SB35,Wall,1.0002,0.1661,5.2177E-002,1.3996E-002,3.2106E-002,3.2106E-002,0.0000,0.3518,0.3518
+Solar View Factor,F3-1,Floor,0.9998,0.2048,6.4321E-002,1.7254E-002,4.0034E-002,4.0034E-002,0.2022,0.0000,0.4312
+Solar View Factor,C3-1,Roof,0.9998,0.2048,6.4321E-002,1.7254E-002,4.0034E-002,4.0034E-002,0.2022,0.4312,0.0000
+Solar View Factor - Zone/Enclosure Information,SPACE4-1,7
+Solar View Factor - Surface Information,LEFT-1,Wall,27.3600,300.0000,90.0000,0.7500,4,7.6000,13.1636,2.4000,7.6000,13.1636,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,2.4000
+Solar View Factor - Surface Information,WL-1,Window,9.1200,300.0000,90.0000,0.0000,4,5.7000,9.8727,2.1000,5.7000,9.8727,0.9000,1.9000,3.2909,0.9000,1.9000,3.2909,2.1000
+Solar View Factor - Surface Information,SB41,Wall,12.5582,165.0000,90.0000,0.7500,4,0.0000,0.0000,2.4000,0.0000,0.0000,0.0000,5.0543,1.3543,0.0000,5.0543,1.3543,2.4000
+Solar View Factor - Surface Information,SB43,Wall,12.3897,74.2152,90.0000,0.7500,4,9.0043,8.1959,2.4000,9.0043,8.1959,0.0000,7.6000,13.1636,0.0000,7.6000,13.1636,2.4000
+Solar View Factor - Surface Information,SB45,Wall,18.9600,120.0000,90.0000,0.7500,4,5.0543,1.3543,2.4000,5.0543,1.3543,0.0000,9.0043,8.1959,0.0000,9.0043,8.1959,2.4000
+Solar View Factor - Surface Information,F4-1,Floor,42.7350,120.0000,180.0000,0.6500,4,5.0543,1.3543,0.0000,0.0000,0.0000,0.0000,7.6000,13.1636,0.0000,9.0043,8.1959,0.0000
+Solar View Factor - Surface Information,C4-1,Roof,42.7350,300.0000,0.0000,0.6500,4,9.0043,8.1959,2.4000,7.6000,13.1636,2.4000,0.0000,0.0000,2.4000,5.0543,1.3543,2.4000
+Approximate or User Input Solar ViewFactors,To Surface,Surface Class,RowSum,LEFT-1,WL-1,SB41,SB43,SB45,F4-1,C4-1
+Solar View Factor,LEFT-1,Wall,1.0000,0.0000,0.0000,9.7066E-002,9.5763E-002,0.1465,0.3303,0.3303
+Solar View Factor,WL-1,Window,1.0000,0.0000,0.0000,9.7066E-002,9.5763E-002,0.1465,0.3303,0.3303
+Solar View Factor,SB41,Wall,1.0000,0.1785,5.9491E-002,0.0000,8.0820E-002,0.1237,0.2788,0.2788
+Solar View Factor,SB43,Wall,1.0000,0.1783,5.9426E-002,8.1829E-002,0.0000,0.1235,0.2785,0.2785
+Solar View Factor,SB45,Wall,1.0000,0.1863,6.2084E-002,8.5489E-002,8.4342E-002,0.0000,0.2909,0.2909
+Solar View Factor,F4-1,Floor,1.0000,0.2222,7.4072E-002,0.1020,0.1006,0.1540,0.0000,0.3471
+Solar View Factor,C4-1,Roof,1.0000,0.2222,7.4072E-002,0.1020,0.1006,0.1540,0.3471,0.0000
+Final Solar ViewFactors,To Surface,Surface Class,RowSum,LEFT-1,WL-1,SB41,SB43,SB45,F4-1,C4-1
+Solar View Factor,LEFT-1,Wall,1.0002,0.0000,0.0000,8.0758E-002,7.9598E-002,0.1268,0.3565,0.3565
+Solar View Factor,WL-1,Window,1.0002,0.0000,0.0000,8.0758E-002,7.9598E-002,0.1268,0.3565,0.3565
+Solar View Factor,SB41,Wall,1.0002,0.1759,5.8648E-002,0.0000,6.5543E-002,0.1047,0.2977,0.2977
+Solar View Factor,SB43,Wall,1.0002,0.1758,5.8591E-002,6.6434E-002,0.0000,0.1046,0.2974,0.2974
+Solar View Factor,SB45,Wall,1.0002,0.1830,6.0985E-002,6.9327E-002,6.8327E-002,0.0000,0.3093,0.3093
+Solar View Factor,F4-1,Floor,0.9998,0.2283,7.6089E-002,8.7482E-002,8.6227E-002,0.1372,0.0000,0.3845
+Solar View Factor,C4-1,Roof,0.9998,0.2283,7.6089E-002,8.7482E-002,8.6227E-002,0.1372,0.3845,0.0000
+Solar View Factor - Zone/Enclosure Information,SPACE5-1,6
+Solar View Factor - Surface Information,SB51,Wall,55.4400,210.0000,90.0000,0.7500,4,5.0543,1.3543,2.4000,5.0543,1.3543,0.0000,25.0595,-10.1957,0.0000,25.0595,-10.1957,2.4000
+Solar View Factor - Surface Information,SB52,Wall,18.9600,120.0000,90.0000,0.7500,4,25.0595,-10.1957,2.4000,25.0595,-10.1957,0.0000,29.0095,-3.3541,0.0000,29.0095,-3.3541,2.4000
+Solar View Factor - Surface Information,SB53,Wall,55.4400,30.0000,90.0000,0.7500,4,29.0095,-3.3541,2.4000,29.0095,-3.3541,0.0000,9.0043,8.1959,0.0000,9.0043,8.1959,2.4000
+Solar View Factor - Surface Information,SB54,Wall,18.9600,300.0000,90.0000,0.7500,4,9.0043,8.1959,2.4000,9.0043,8.1959,0.0000,5.0543,1.3543,0.0000,5.0543,1.3543,2.4000
+Solar View Factor - Surface Information,F5-1,Floor,182.4900,30.0000,180.0000,0.6500,4,29.0095,-3.3541,0.0000,25.0595,-10.1957,0.0000,5.0543,1.3543,0.0000,9.0043,8.1959,0.0000
+Solar View Factor - Surface Information,C5-1,Roof,182.4900,210.0000,0.0000,0.6500,4,9.0043,8.1959,2.4000,5.0543,1.3543,2.4000,25.0595,-10.1957,2.4000,29.0095,-3.3541,2.4000
+Approximate or User Input Solar ViewFactors,To Surface,Surface Class,RowSum,SB51,SB52,SB53,SB54,F5-1,C5-1
+Solar View Factor,SB51,Wall,1.0000,0.0000,4.1367E-002,0.1210,4.1367E-002,0.3982,0.3982
+Solar View Factor,SB52,Wall,1.0000,0.1120,0.0000,0.1120,3.8317E-002,0.3688,0.3688
+Solar View Factor,SB53,Wall,1.0000,0.1210,4.1367E-002,0.0000,4.1367E-002,0.3982,0.3982
+Solar View Factor,SB54,Wall,1.0000,0.1120,3.8317E-002,0.1120,0.0000,0.3688,0.3688
+Solar View Factor,F5-1,Floor,1.0000,0.1673,5.7231E-002,0.1673,5.7231E-002,0.0000,0.5508
+Solar View Factor,C5-1,Roof,1.0000,0.1673,5.7231E-002,0.1673,5.7231E-002,0.5508,0.0000
+Final Solar ViewFactors,To Surface,Surface Class,RowSum,SB51,SB52,SB53,SB54,F5-1,C5-1
+Solar View Factor,SB51,Wall,1.0002,0.0000,2.6720E-002,8.3114E-002,2.6720E-002,0.4318,0.4318
+Solar View Factor,SB52,Wall,1.0002,7.8131E-002,0.0000,7.8131E-002,2.5072E-002,0.4094,0.4094
+Solar View Factor,SB53,Wall,1.0002,8.3114E-002,2.6720E-002,0.0000,2.6720E-002,0.4318,0.4318
+Solar View Factor,SB54,Wall,1.0002,7.8131E-002,2.5072E-002,7.8131E-002,0.0000,0.4094,0.4094
+Solar View Factor,F5-1,Floor,0.9999,0.1312,4.2537E-002,0.1312,4.2537E-002,0.0000,0.6525
+Solar View Factor,C5-1,Roof,0.9999,0.1312,4.2537E-002,0.1312,4.2537E-002,0.6525,0.0000
+! <Zone Internal Gains Nominal>,Zone Name, Floor Area {m2},# Occupants,Area per Occupant {m2/person},Occupant per Area {person/m2},Interior Lighting {W/m2},Electric Load {W/m2},Gas Load {W/m2},Other Load {W/m2},Hot Water Eq {W/m2},Steam Equipment {W/m2},Sum Loads per Area {W/m2},Outdoor Controlled Baseboard Heat
+ Zone Internal Gains Nominal, PLENUM-1,463.60,0.0,N/A,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,No
+ Zone Internal Gains Nominal, SPACE1-1,99.16,11.0,9.015,0.111,15.974,10.649,0.000,0.000,0.000,0.000,26.624,No
+ Zone Internal Gains Nominal, SPACE2-1,42.74,5.0,8.547,0.117,16.006,10.670,0.000,0.000,0.000,0.000,26.676,No
+ Zone Internal Gains Nominal, SPACE3-1,96.48,11.0,8.771,0.114,16.418,10.945,0.000,0.000,0.000,0.000,27.363,No
+ Zone Internal Gains Nominal, SPACE4-1,42.74,5.0,8.547,0.117,16.006,10.670,0.000,0.000,0.000,0.000,26.676,No
+ Zone Internal Gains Nominal, SPACE5-1,182.49,20.0,9.125,0.110,16.242,10.828,0.000,0.000,0.000,0.000,27.070,No
+! <People Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Number of People {},People/Floor Area {person/m2},Floor Area per person {m2/person},Fraction Radiant,Fraction Convected,Sensible Fraction Calculation,Activity level,ASHRAE 55 Warnings,Carbon Dioxide Generation Rate,Nominal Minimum Number of People,Nominal Maximum Number of People
+ People Internal Gains Nominal, SPACE1-1 PEOPLE 1,OCCUPY-1,SPACE1-1,99.16,11.0,11.0,0.111,9.015,0.300,0.700,AutoCalculate,ACTSCHD,No,3.8200E-008,0,11
+ People Internal Gains Nominal, SPACE2-1 PEOPLE 1,OCCUPY-1,SPACE2-1,42.74,5.0,5.0,0.117,8.547,0.300,0.700,AutoCalculate,ACTSCHD,No,3.8200E-008,0,5
+ People Internal Gains Nominal, SPACE3-1 PEOPLE 1,OCCUPY-1,SPACE3-1,96.48,11.0,11.0,0.114,8.771,0.300,0.700,AutoCalculate,ACTSCHD,No,3.8200E-008,0,11
+ People Internal Gains Nominal, SPACE4-1 PEOPLE 1,OCCUPY-1,SPACE4-1,42.74,5.0,5.0,0.117,8.547,0.300,0.700,AutoCalculate,ACTSCHD,No,3.8200E-008,0,5
+ People Internal Gains Nominal, SPACE5-1 PEOPLE 1,OCCUPY-1,SPACE5-1,182.49,20.0,20.0,0.110,9.125,0.300,0.700,AutoCalculate,ACTSCHD,No,3.8200E-008,0,20
+! <Lights Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Lighting Level {W},Lights/Floor Area {W/m2},Lights per person {W/person},Fraction Return Air,Fraction Radiant,Fraction Short Wave,Fraction Convected,Fraction Replaceable,End-Use Category,Nominal Minimum Lighting Level {W},Nominal Maximum Lighting Level {W}
+ Lights Internal Gains Nominal, SPACE1-1 LIGHTS 1,LIGHTS-1,SPACE1-1,99.16,11.0,1584.000,15.974,144.000,0.200,0.590,0.200,1.000E-002,0.000,GeneralLights,79.200,1584.000
+ Lights Internal Gains Nominal, SPACE2-1 LIGHTS 1,LIGHTS-1,SPACE2-1,42.74,5.0,684.000,16.006,136.800,0.200,0.590,0.200,1.000E-002,0.000,GeneralLights,34.200,684.000
+ Lights Internal Gains Nominal, SPACE3-1 LIGHTS 1,LIGHTS-1,SPACE3-1,96.48,11.0,1584.000,16.418,144.000,0.200,0.590,0.200,1.000E-002,0.000,GeneralLights,79.200,1584.000
+ Lights Internal Gains Nominal, SPACE4-1 LIGHTS 1,LIGHTS-1,SPACE4-1,42.74,5.0,684.000,16.006,136.800,0.200,0.590,0.200,1.000E-002,0.000,GeneralLights,34.200,684.000
+ Lights Internal Gains Nominal, SPACE5-1 LIGHTS 1,LIGHTS-1,SPACE5-1,182.49,20.0,2964.000,16.242,148.200,0.200,0.590,0.200,1.000E-002,0.000,GeneralLights,148.200,2964.000
+! <ElectricEquipment Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Equipment Level {W},Equipment/Floor Area {W/m2},Equipment per person {W/person},Fraction Latent,Fraction Radiant,Fraction Lost,Fraction Convected,End-Use SubCategory,Nominal Minimum Equipment Level {W},Nominal Maximum Equipment Level {W}
+ ElectricEquipment Internal Gains Nominal, SPACE1-1 ELECEQ 1,EQUIP-1,SPACE1-1,99.16,11.0,1056.000,10.649,96.000,0.000,0.300,0.000,0.700,General,21.120,950.400
+ ElectricEquipment Internal Gains Nominal, SPACE2-1 ELECEQ 1,EQUIP-1,SPACE2-1,42.74,5.0,456.000,10.670,91.200,0.000,0.300,0.000,0.700,General,9.120,410.400
+ ElectricEquipment Internal Gains Nominal, SPACE3-1 ELECEQ 1,EQUIP-1,SPACE3-1,96.48,11.0,1056.000,10.945,96.000,0.000,0.300,0.000,0.700,General,21.120,950.400
+ ElectricEquipment Internal Gains Nominal, SPACE4-1 ELECEQ 1,EQUIP-1,SPACE4-1,42.74,5.0,456.000,10.670,91.200,0.000,0.300,0.000,0.700,General,9.120,410.400
+ ElectricEquipment Internal Gains Nominal, SPACE5-1 ELECEQ 1,EQUIP-1,SPACE5-1,182.49,20.0,1976.000,10.828,98.800,0.000,0.300,0.000,0.700,General,39.520,1778.400
+! <Shadowing/Sun Position Calculations Annual Simulations>, Shading Calculation Method, Shading Calculation Update Frequency Method, Shading Calculation Update Frequency {days}, Maximum Figures in Shadow Overlap Calculations {}, Polygon Clipping Algorithm, Pixel Counting Resolution, Sky Diffuse Modeling Algorithm, Output External Shading Calculation Results, Disable Self-Shading Within Shading Zone Groups, Disable Self-Shading From Shading Zone Groups to Other Zones
+Shadowing/Sun Position Calculations Annual Simulations,PolygonClipping,Periodic,20,15000,SutherlandHodgman,512,SimpleSkyDiffuseModeling,No,No,No
+! <Surface View Factor and Grey Interchange Information>
+! <View Factor - Zone/Enclosure Information>,Zone/Enclosure Name,Number of Surfaces
+! <View Factor - Surface Information>,Surface Name,Surface Class,Area {m2},Azimuth,Tilt,Thermal Emissivity,#Sides,Vertices
+! <View Factor / Grey Interchange Type>,Surface Name(s)
+! <View Factor>,Surface Name,Surface Class,Row Sum,View Factors for each Surface
+Surface View Factor - Zone/Enclosure Information,PLENUM-1,10
+Surface View Factor - Surface Information,WALL-1PF,Wall,18.3000,210.0000,90.0000,0.9000,4,0.0000,0.0000,3.0000,0.0000,0.0000,2.4000,26.4138,-15.2500,2.4000,26.4138,-15.2500,3.0000
+Surface View Factor - Surface Information,WALL-1PR,Wall,9.1200,120.0000,90.0000,0.9000,4,26.4138,-15.2500,3.0000,26.4138,-15.2500,2.4000,34.0138,-2.0864,2.4000,34.0138,-2.0864,3.0000
+Surface View Factor - Surface Information,WALL-1PB,Wall,18.3000,30.0000,90.0000,0.9000,4,34.0138,-2.0864,3.0000,34.0138,-2.0864,2.4000,7.6000,13.1636,2.4000,7.6000,13.1636,3.0000
+Surface View Factor - Surface Information,WALL-1PL,Wall,9.1200,300.0000,90.0000,0.9000,4,7.6000,13.1636,3.0000,7.6000,13.1636,2.4000,0.0000,0.0000,2.4000,0.0000,0.0000,3.0000
+Surface View Factor - Surface Information,C1-1P,Floor,99.1600,30.0000,180.0000,0.6500,4,25.0595,-10.1957,2.4000,26.4138,-15.2500,2.4000,0.0000,0.0000,2.4000,5.0543,1.3543,2.4000
+Surface View Factor - Surface Information,C2-1P,Floor,42.7350,300.0000,180.0000,0.6500,4,29.0095,-3.3541,2.4000,34.0138,-2.0864,2.4000,26.4138,-15.2500,2.4000,25.0595,-10.1957,2.4000
+Surface View Factor - Surface Information,C3-1P,Floor,96.4800,74.2152,180.0000,0.6500,4,29.0095,-3.3541,2.4000,9.0043,8.1959,2.4000,7.6000,13.1636,2.4000,34.0138,-2.0864,2.4000
+Surface View Factor - Surface Information,C4-1P,Floor,42.7350,120.0000,180.0000,0.6500,4,5.0543,1.3543,2.4000,0.0000,0.0000,2.4000,7.6000,13.1636,2.4000,9.0043,8.1959,2.4000
+Surface View Factor - Surface Information,C5-1P,Floor,182.4900,30.0000,180.0000,0.6500,4,29.0095,-3.3541,2.4000,25.0595,-10.1957,2.4000,5.0543,1.3543,2.4000,9.0043,8.1959,2.4000
+Surface View Factor - Surface Information,TOP-1,Roof,463.6000,210.0000,0.0000,0.9000,4,7.6000,13.1636,3.0000,0.0000,0.0000,3.0000,26.4138,-15.2500,3.0000,34.0138,-2.0864,3.0000
+Approximate or User Input ViewFactors,To Surface,Surface Class,RowSum,WALL-1PF,WALL-1PR,WALL-1PB,WALL-1PL,C1-1P,C2-1P,C3-1P,C4-1P,C5-1P,TOP-1
+View Factor,WALL-1PF,Wall,1.0000,0.0000,9.4631E-003,1.8989E-002,9.4631E-003,0.1029,4.4343E-002,0.1001,4.4343E-002,0.1894,0.4810
+View Factor,WALL-1PR,Wall,1.0000,1.8809E-002,0.0000,1.8809E-002,9.3738E-003,0.1019,4.3924E-002,9.9165E-002,4.3924E-002,0.1876,0.4765
+View Factor,WALL-1PB,Wall,1.0000,1.8989E-002,9.4631E-003,0.0000,9.4631E-003,0.1029,4.4343E-002,0.1001,4.4343E-002,0.1894,0.4810
+View Factor,WALL-1PL,Wall,1.0000,1.8809E-002,9.3738E-003,1.8809E-002,0.0000,0.1019,4.3924E-002,9.9165E-002,4.3924E-002,0.1876,0.4765
+View Factor,C1-1P,Floor,1.0000,3.5298E-002,1.7591E-002,3.5298E-002,1.7591E-002,0.0000,0.0000,0.0000,0.0000,0.0000,0.8942
+View Factor,C2-1P,Floor,1.0000,3.5298E-002,1.7591E-002,3.5298E-002,1.7591E-002,0.0000,0.0000,0.0000,0.0000,0.0000,0.8942
+View Factor,C3-1P,Floor,1.0000,3.5298E-002,1.7591E-002,3.5298E-002,1.7591E-002,0.0000,0.0000,0.0000,0.0000,0.0000,0.8942
+View Factor,C4-1P,Floor,1.0000,3.5298E-002,1.7591E-002,3.5298E-002,1.7591E-002,0.0000,0.0000,0.0000,0.0000,0.0000,0.8942
+View Factor,C5-1P,Floor,1.0000,3.5298E-002,1.7591E-002,3.5298E-002,1.7591E-002,0.0000,0.0000,0.0000,0.0000,0.0000,0.8942
+View Factor,TOP-1,Roof,1.0000,3.5298E-002,1.7591E-002,3.5298E-002,1.7591E-002,0.1913,8.2430E-002,0.1861,8.2430E-002,0.3520,0.0000
+Final ViewFactors,To Surface,Surface Class,RowSum,WALL-1PF,WALL-1PR,WALL-1PB,WALL-1PL,C1-1P,C2-1P,C3-1P,C4-1P,C5-1P,TOP-1
+View Factor,WALL-1PF,Wall,1.0002,0.0000,4.3376E-003,8.7573E-003,4.3376E-003,0.1051,4.5295E-002,0.1023,4.5295E-002,0.1934,0.4914
+View Factor,WALL-1PR,Wall,1.0002,8.7036E-003,0.0000,8.7036E-003,4.3109E-003,0.1046,4.5097E-002,0.1018,4.5097E-002,0.1926,0.4892
+View Factor,WALL-1PB,Wall,1.0002,8.7573E-003,4.3376E-003,0.0000,4.3376E-003,0.1051,4.5295E-002,0.1023,4.5295E-002,0.1934,0.4914
+View Factor,WALL-1PL,Wall,1.0002,8.7036E-003,4.3109E-003,8.7036E-003,0.0000,0.1046,4.5097E-002,0.1018,4.5097E-002,0.1926,0.4892
+View Factor,C1-1P,Floor,1.0000,1.9396E-002,9.6240E-003,1.9396E-002,9.6240E-003,0.0000,0.0000,0.0000,0.0000,0.0000,0.9419
+View Factor,C2-1P,Floor,1.0000,1.9396E-002,9.6240E-003,1.9396E-002,9.6240E-003,0.0000,0.0000,0.0000,0.0000,0.0000,0.9419
+View Factor,C3-1P,Floor,1.0000,1.9396E-002,9.6240E-003,1.9396E-002,9.6240E-003,0.0000,0.0000,0.0000,0.0000,0.0000,0.9419
+View Factor,C4-1P,Floor,1.0000,1.9396E-002,9.6240E-003,1.9396E-002,9.6240E-003,0.0000,0.0000,0.0000,0.0000,0.0000,0.9419
+View Factor,C5-1P,Floor,1.0000,1.9396E-002,9.6240E-003,1.9396E-002,9.6240E-003,0.0000,0.0000,0.0000,0.0000,0.0000,0.9419
+View Factor,TOP-1,Roof,1.0000,1.9396E-002,9.6240E-003,1.9396E-002,9.6240E-003,0.2015,8.6830E-002,0.1960,8.6830E-002,0.3708,0.0000
+Script F Factors,X Surface,WALL-1PF,WALL-1PR,WALL-1PB,WALL-1PL,C1-1P,C2-1P,C3-1P,C4-1P,C5-1P,TOP-1
+Script F Factor,WALL-1PF,4.1435E-003,5.5688E-003,1.1231E-002,5.5688E-003,6.9657E-002,3.0020E-002,6.7775E-002,3.0020E-002,0.1282,0.5480
+Script F Factor,WALL-1PR,1.1174E-002,2.0503E-003,1.1174E-002,5.5406E-003,6.9384E-002,2.9902E-002,6.7508E-002,2.9902E-002,0.1277,0.5458
+Script F Factor,WALL-1PB,1.1231E-002,5.5688E-003,4.1435E-003,5.5688E-003,6.9657E-002,3.0020E-002,6.7775E-002,3.0020E-002,0.1282,0.5480
+Script F Factor,WALL-1PL,1.1174E-002,5.5406E-003,1.1174E-002,2.0503E-003,6.9384E-002,2.9902E-002,6.7508E-002,2.9902E-002,0.1277,0.5458
+Script F Factor,C1-1P,1.2855E-002,6.3814E-003,1.2855E-002,6.3814E-003,8.6045E-003,3.7083E-003,8.3719E-003,3.7083E-003,1.5835E-002,0.5713
+Script F Factor,C2-1P,1.2855E-002,6.3814E-003,1.2855E-002,6.3814E-003,8.6045E-003,3.7083E-003,8.3719E-003,3.7083E-003,1.5835E-002,0.5713
+Script F Factor,C3-1P,1.2855E-002,6.3814E-003,1.2855E-002,6.3814E-003,8.6045E-003,3.7083E-003,8.3719E-003,3.7083E-003,1.5835E-002,0.5713
+Script F Factor,C4-1P,1.2855E-002,6.3814E-003,1.2855E-002,6.3814E-003,8.6045E-003,3.7083E-003,8.3719E-003,3.7083E-003,1.5835E-002,0.5713
+Script F Factor,C5-1P,1.2855E-002,6.3814E-003,1.2855E-002,6.3814E-003,8.6045E-003,3.7083E-003,8.3719E-003,3.7083E-003,1.5835E-002,0.5713
+Script F Factor,TOP-1,2.1630E-002,1.0737E-002,2.1630E-002,1.0737E-002,0.1222,5.2662E-002,0.1189,5.2662E-002,0.2249,0.2640
+Surface View Factor - Zone/Enclosure Information,SPACE1-1,8
+Surface View Factor - Surface Information,FRONT-1,Wall,51.3900,210.0000,90.0000,0.9000,4,0.0000,0.0000,2.4000,0.0000,0.0000,0.0000,26.4138,-15.2500,0.0000,26.4138,-15.2500,2.4000
+Surface View Factor - Surface Information,WF-1,Window,16.5600,210.0000,90.0000,0.8400,4,2.5981,-1.5000,2.1000,2.5981,-1.5000,0.9000,14.5492,-8.4000,0.9000,14.5492,-8.4000,2.1000
+Surface View Factor - Surface Information,DF-1,Window,5.2500,210.0000,90.0000,0.8400,4,18.4463,-10.6500,2.1000,18.4463,-10.6500,0.0000,20.6114,-11.9000,0.0000,20.6114,-11.9000,2.1000
+Surface View Factor - Surface Information,SB12,Wall,12.5582,75.0000,90.0000,0.9000,4,26.4138,-15.2500,2.4000,26.4138,-15.2500,0.0000,25.0595,-10.1957,0.0000,25.0595,-10.1957,2.4000
+Surface View Factor - Surface Information,SB14,Wall,12.5582,345.0000,90.0000,0.9000,4,5.0543,1.3543,2.4000,5.0543,1.3543,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,2.4000
+Surface View Factor - Surface Information,SB15,Wall,55.4400,30.0000,90.0000,0.9000,4,25.0595,-10.1957,2.4000,25.0595,-10.1957,0.0000,5.0543,1.3543,0.0000,5.0543,1.3543,2.4000
+Surface View Factor - Surface Information,F1-1,Floor,99.1600,30.0000,180.0000,0.9000,4,25.0595,-10.1957,0.0000,26.4138,-15.2500,0.0000,0.0000,0.0000,0.0000,5.0543,1.3543,0.0000
+Surface View Factor - Surface Information,C1-1,Roof,99.1600,210.0000,0.0000,0.6500,4,5.0543,1.3543,2.4000,0.0000,0.0000,2.4000,26.4138,-15.2500,2.4000,25.0595,-10.1957,2.4000
+Approximate or User Input ViewFactors,To Surface,Surface Class,RowSum,FRONT-1,WF-1,DF-1,SB12,SB14,SB15,F1-1,C1-1
+View Factor,FRONT-1,Wall,1.0000,0.0000,0.0000,0.0000,4.5031E-002,4.5031E-002,0.1988,0.3556,0.3556
+View Factor,WF-1,Window,1.0000,0.0000,0.0000,0.0000,4.5031E-002,4.5031E-002,0.1988,0.3556,0.3556
+View Factor,DF-1,Window,1.0000,0.0000,0.0000,0.0000,4.5031E-002,4.5031E-002,0.1988,0.3556,0.3556
+View Factor,SB12,Wall,1.0000,0.1514,4.8775E-002,1.5463E-002,0.0000,3.6988E-002,0.1633,0.2921,0.2921
+View Factor,SB14,Wall,1.0000,0.1514,4.8775E-002,1.5463E-002,3.6988E-002,0.0000,0.1633,0.2921,0.2921
+View Factor,SB15,Wall,1.0000,0.1732,5.5826E-002,1.7698E-002,4.2335E-002,4.2335E-002,0.0000,0.3343,0.3343
+View Factor,F1-1,Floor,1.0000,0.2032,6.5476E-002,2.0758E-002,4.9654E-002,4.9654E-002,0.2192,0.0000,0.3921
+View Factor,C1-1,Roof,1.0000,0.2032,6.5476E-002,2.0758E-002,4.9654E-002,4.9654E-002,0.2192,0.3921,0.0000
+Final ViewFactors,To Surface,Surface Class,RowSum,FRONT-1,WF-1,DF-1,SB12,SB14,SB15,F1-1,C1-1
+View Factor,FRONT-1,Wall,1.0003,0.0000,0.0000,0.0000,3.4233E-002,3.4233E-002,0.1708,0.3805,0.3805
+View Factor,WF-1,Window,1.0003,0.0000,0.0000,0.0000,3.4233E-002,3.4233E-002,0.1708,0.3805,0.3805
+View Factor,DF-1,Window,1.0003,0.0000,0.0000,0.0000,3.4233E-002,3.4233E-002,0.1708,0.3805,0.3805
+View Factor,SB12,Wall,1.0001,0.1401,4.5142E-002,1.4311E-002,0.0000,2.7867E-002,0.1403,0.3162,0.3162
+View Factor,SB14,Wall,1.0001,0.1401,4.5142E-002,1.4311E-002,2.7867E-002,0.0000,0.1403,0.3162,0.3162
+View Factor,SB15,Wall,1.0002,0.1583,5.1012E-002,1.6172E-002,3.1774E-002,3.1774E-002,0.0000,0.3556,0.3556
+View Factor,F1-1,Floor,0.9998,0.1972,6.3549E-002,2.0147E-002,4.0049E-002,4.0049E-002,0.1988,0.0000,0.4400
+View Factor,C1-1,Roof,0.9998,0.1972,6.3549E-002,2.0147E-002,4.0049E-002,4.0049E-002,0.1988,0.4400,0.0000
+Script F Factors,X Surface,FRONT-1,WF-1,DF-1,SB12,SB14,SB15,F1-1,C1-1
+Script F Factor,FRONT-1,3.4102E-002,1.0257E-002,3.2516E-003,3.4743E-002,3.4743E-002,0.1710,0.3703,0.2419
+Script F Factor,WF-1,3.1829E-002,9.5728E-003,3.0348E-003,3.2427E-002,3.2427E-002,0.1596,0.3456,0.2258
+Script F Factor,DF-1,3.1829E-002,9.5728E-003,3.0348E-003,3.2427E-002,3.2427E-002,0.1596,0.3456,0.2258
+Script F Factor,SB12,0.1422,4.2760E-002,1.3556E-002,6.6202E-003,2.9130E-002,0.1443,0.3154,0.2061
+Script F Factor,SB14,0.1422,4.2760E-002,1.3556E-002,2.9130E-002,6.6202E-003,0.1443,0.3154,0.2061
+Script F Factor,SB15,0.1585,4.7660E-002,1.5110E-002,3.2693E-002,3.2693E-002,3.4474E-002,0.3503,0.2288
+Script F Factor,F1-1,0.1919,5.7713E-002,1.8297E-002,3.9949E-002,3.9949E-002,0.1958,8.0529E-002,0.2757
+Script F Factor,C1-1,0.1254,3.7708E-002,1.1955E-002,2.6102E-002,2.6102E-002,0.1279,0.2757,1.9024E-002
+Surface View Factor - Zone/Enclosure Information,SPACE2-1,7
+Surface View Factor - Surface Information,RIGHT-1,Wall,27.3600,120.0000,90.0000,0.9000,4,26.4138,-15.2500,2.4000,26.4138,-15.2500,0.0000,34.0138,-2.0864,0.0000,34.0138,-2.0864,2.4000
+Surface View Factor - Surface Information,WR-1,Window,9.1200,120.0000,90.0000,0.8400,4,28.3138,-11.9591,2.1000,28.3138,-11.9591,0.9000,32.1138,-5.3773,0.9000,32.1138,-5.3773,2.1000
+Surface View Factor - Surface Information,SB21,Wall,12.5582,255.0000,90.0000,0.9000,4,25.0595,-10.1957,2.4000,25.0595,-10.1957,0.0000,26.4138,-15.2500,0.0000,26.4138,-15.2500,2.4000
+Surface View Factor - Surface Information,SB23,Wall,12.3897,345.7848,90.0000,0.9000,4,34.0138,-2.0864,2.4000,34.0138,-2.0864,0.0000,29.0095,-3.3541,0.0000,29.0095,-3.3541,2.4000
+Surface View Factor - Surface Information,SB25,Wall,18.9600,300.0000,90.0000,0.9000,4,29.0095,-3.3541,2.4000,29.0095,-3.3541,0.0000,25.0595,-10.1957,0.0000,25.0595,-10.1957,2.4000
+Surface View Factor - Surface Information,F2-1,Floor,42.7350,300.0000,180.0000,0.9000,4,29.0095,-3.3541,0.0000,34.0138,-2.0864,0.0000,26.4138,-15.2500,0.0000,25.0595,-10.1957,0.0000
+Surface View Factor - Surface Information,C2-1,Roof,42.7350,120.0000,0.0000,0.6500,4,25.0595,-10.1957,2.4000,26.4138,-15.2500,2.4000,34.0138,-2.0864,2.4000,29.0095,-3.3541,2.4000
+Approximate or User Input ViewFactors,To Surface,Surface Class,RowSum,RIGHT-1,WR-1,SB21,SB23,SB25,F2-1,C2-1
+View Factor,RIGHT-1,Wall,1.0000,0.0000,0.0000,9.7066E-002,9.5763E-002,0.1465,0.3303,0.3303
+View Factor,WR-1,Window,1.0000,0.0000,0.0000,9.7066E-002,9.5763E-002,0.1465,0.3303,0.3303
+View Factor,SB21,Wall,1.0000,0.1785,5.9491E-002,0.0000,8.0820E-002,0.1237,0.2788,0.2788
+View Factor,SB23,Wall,1.0000,0.1783,5.9426E-002,8.1829E-002,0.0000,0.1235,0.2785,0.2785
+View Factor,SB25,Wall,1.0000,0.1863,6.2084E-002,8.5489E-002,8.4342E-002,0.0000,0.2909,0.2909
+View Factor,F2-1,Floor,1.0000,0.2222,7.4072E-002,0.1020,0.1006,0.1540,0.0000,0.3471
+View Factor,C2-1,Roof,1.0000,0.2222,7.4072E-002,0.1020,0.1006,0.1540,0.3471,0.0000
+Final ViewFactors,To Surface,Surface Class,RowSum,RIGHT-1,WR-1,SB21,SB23,SB25,F2-1,C2-1
+View Factor,RIGHT-1,Wall,1.0002,0.0000,0.0000,8.0758E-002,7.9598E-002,0.1268,0.3565,0.3565
+View Factor,WR-1,Window,1.0002,0.0000,0.0000,8.0758E-002,7.9598E-002,0.1268,0.3565,0.3565
+View Factor,SB21,Wall,1.0002,0.1759,5.8648E-002,0.0000,6.5543E-002,0.1047,0.2977,0.2977
+View Factor,SB23,Wall,1.0002,0.1758,5.8591E-002,6.6434E-002,0.0000,0.1046,0.2974,0.2974
+View Factor,SB25,Wall,1.0002,0.1830,6.0985E-002,6.9327E-002,6.8327E-002,0.0000,0.3093,0.3093
+View Factor,F2-1,Floor,0.9998,0.2283,7.6089E-002,8.7482E-002,8.6227E-002,0.1372,0.0000,0.3845
+View Factor,C2-1,Roof,0.9998,0.2283,7.6089E-002,8.7482E-002,8.6227E-002,0.1372,0.3845,0.0000
+Script F Factors,X Surface,RIGHT-1,WR-1,SB21,SB23,SB25,F2-1,C2-1
+Script F Factor,RIGHT-1,3.7839E-002,1.1772E-002,7.9829E-002,7.8690E-002,0.1248,0.3415,0.2257
+Script F Factor,WR-1,3.5317E-002,1.0987E-002,7.4507E-002,7.3444E-002,0.1165,0.3187,0.2107
+Script F Factor,SB21,0.1739,5.4108E-002,1.4080E-002,6.6623E-002,0.1059,0.2923,0.1932
+Script F Factor,SB23,0.1738,5.4062E-002,6.7529E-002,1.3873E-002,0.1058,0.2921,0.1931
+Script F Factor,SB25,0.1801,5.6024E-002,7.0123E-002,6.9119E-002,2.2407E-002,0.3025,0.2000
+Script F Factor,F2-1,0.2186,6.8022E-002,8.5903E-002,8.4679E-002,0.1342,6.6285E-002,0.2421
+Script F Factor,C2-1,0.1445,4.4965E-002,5.6785E-002,5.5976E-002,8.8712E-002,0.2421,1.6834E-002
+Surface View Factor - Zone/Enclosure Information,SPACE3-1,8
+Surface View Factor - Surface Information,BACK-1,Wall,52.3500,30.0000,90.0000,0.9000,4,34.0138,-2.0864,2.4000,34.0138,-2.0864,0.0000,7.6000,13.1636,0.0000,7.6000,13.1636,2.4000
+Surface View Factor - Surface Information,WB-1,Window,16.4400,30.0000,90.0000,0.8400,4,31.3291,-0.5364,2.1000,31.3291,-0.5364,0.9000,19.4645,6.3136,0.9000,19.4645,6.3136,2.1000
+Surface View Factor - Surface Information,DB-1,Window,4.4100,30.0000,90.0000,0.8400,4,15.4808,8.6136,2.1000,15.4808,8.6136,0.0000,13.6622,9.6636,0.0000,13.6622,9.6636,2.1000
+Surface View Factor - Surface Information,SB32,Wall,12.3897,165.7848,90.0000,0.9000,4,29.0095,-3.3541,2.4000,29.0095,-3.3541,0.0000,34.0138,-2.0864,0.0000,34.0138,-2.0864,2.4000
+Surface View Factor - Surface Information,SB34,Wall,12.3897,254.2152,90.0000,0.9000,4,7.6000,13.1636,2.4000,7.6000,13.1636,0.0000,9.0043,8.1959,0.0000,9.0043,8.1959,2.4000
+Surface View Factor - Surface Information,SB35,Wall,55.4400,210.0000,90.0000,0.9000,4,9.0043,8.1959,2.4000,9.0043,8.1959,0.0000,29.0095,-3.3541,0.0000,29.0095,-3.3541,2.4000
+Surface View Factor - Surface Information,F3-1,Floor,96.4800,74.2152,180.0000,0.9000,4,29.0095,-3.3541,0.0000,9.0043,8.1959,0.0000,7.6000,13.1636,0.0000,34.0138,-2.0864,0.0000
+Surface View Factor - Surface Information,C3-1,Roof,96.4800,254.2152,0.0000,0.6500,4,34.0138,-2.0864,2.4000,7.6000,13.1636,2.4000,9.0043,8.1959,2.4000,29.0095,-3.3541,2.4000
+Approximate or User Input ViewFactors,To Surface,Surface Class,RowSum,BACK-1,WB-1,DB-1,SB32,SB34,SB35,F3-1,C3-1
+View Factor,BACK-1,Wall,1.0000,0.0000,0.0000,0.0000,4.5354E-002,4.5354E-002,0.2029,0.3532,0.3532
+View Factor,WB-1,Window,1.0000,0.0000,0.0000,0.0000,4.5354E-002,4.5354E-002,0.2029,0.3532,0.3532
+View Factor,DB-1,Window,1.0000,0.0000,0.0000,0.0000,4.5354E-002,4.5354E-002,0.2029,0.3532,0.3532
+View Factor,SB32,Wall,1.0000,0.1567,4.9223E-002,1.3204E-002,0.0000,3.7096E-002,0.1660,0.2889,0.2889
+View Factor,SB34,Wall,1.0000,0.1567,4.9223E-002,1.3204E-002,3.7096E-002,0.0000,0.1660,0.2889,0.2889
+View Factor,SB35,Wall,1.0000,0.1799,5.6507E-002,1.5158E-002,4.2585E-002,4.2585E-002,0.0000,0.3316,0.3316
+View Factor,F3-1,Floor,1.0000,0.2095,6.5786E-002,1.7647E-002,4.9579E-002,4.9579E-002,0.2218,0.0000,0.3861
+View Factor,C3-1,Roof,1.0000,0.2095,6.5786E-002,1.7647E-002,4.9579E-002,4.9579E-002,0.2218,0.3861,0.0000
+Final ViewFactors,To Surface,Surface Class,RowSum,BACK-1,WB-1,DB-1,SB32,SB34,SB35,F3-1,C3-1
+View Factor,BACK-1,Wall,1.0003,0.0000,0.0000,0.0000,3.4682E-002,3.4682E-002,0.1760,0.3775,0.3775
+View Factor,WB-1,Window,1.0003,0.0000,0.0000,0.0000,3.4682E-002,3.4682E-002,0.1760,0.3775,0.3775
+View Factor,DB-1,Window,1.0003,0.0000,0.0000,0.0000,3.4682E-002,3.4682E-002,0.1760,0.3775,0.3775
+View Factor,SB32,Wall,1.0001,0.1465,4.6020E-002,1.2345E-002,0.0000,2.8053E-002,0.1437,0.3117,0.3117
+View Factor,SB34,Wall,1.0001,0.1465,4.6020E-002,1.2345E-002,2.8053E-002,0.0000,0.1437,0.3117,0.3117
+View Factor,SB35,Wall,1.0002,0.1661,5.2177E-002,1.3996E-002,3.2106E-002,3.2106E-002,0.0000,0.3518,0.3518
+View Factor,F3-1,Floor,0.9998,0.2048,6.4321E-002,1.7254E-002,4.0034E-002,4.0034E-002,0.2022,0.0000,0.4312
+View Factor,C3-1,Roof,0.9998,0.2048,6.4321E-002,1.7254E-002,4.0034E-002,4.0034E-002,0.2022,0.4312,0.0000
+Script F Factors,X Surface,BACK-1,WB-1,DB-1,SB32,SB34,SB35,F3-1,C3-1
+Script F Factor,BACK-1,3.5255E-002,1.0333E-002,2.7719E-003,3.5075E-002,3.5075E-002,0.1755,0.3664,0.2398
+Script F Factor,WB-1,3.2904E-002,9.6444E-003,2.5871E-003,3.2736E-002,3.2736E-002,0.1638,0.3420,0.2239
+Script F Factor,DB-1,3.2904E-002,9.6444E-003,2.5871E-003,3.2736E-002,3.2736E-002,0.1638,0.3420,0.2239
+Script F Factor,SB32,0.1482,4.3438E-002,1.1652E-002,6.5818E-003,2.9241E-002,0.1473,0.3104,0.2032
+Script F Factor,SB34,0.1482,4.3438E-002,1.1652E-002,2.9241E-002,6.5818E-003,0.1473,0.3104,0.2032
+Script F Factor,SB35,0.1657,4.8560E-002,1.3026E-002,3.2927E-002,3.2927E-002,3.4889E-002,0.3458,0.2264
+Script F Factor,F3-1,0.1988,5.8273E-002,1.5632E-002,3.9865E-002,3.9865E-002,0.1987,7.8264E-002,0.2704
+Script F Factor,C3-1,0.1301,3.8145E-002,1.0232E-002,2.6095E-002,2.6095E-002,0.1301,0.2704,1.8709E-002
+Surface View Factor - Zone/Enclosure Information,SPACE4-1,7
+Surface View Factor - Surface Information,LEFT-1,Wall,27.3600,300.0000,90.0000,0.9000,4,7.6000,13.1636,2.4000,7.6000,13.1636,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,2.4000
+Surface View Factor - Surface Information,WL-1,Window,9.1200,300.0000,90.0000,0.8400,4,5.7000,9.8727,2.1000,5.7000,9.8727,0.9000,1.9000,3.2909,0.9000,1.9000,3.2909,2.1000
+Surface View Factor - Surface Information,SB41,Wall,12.5582,165.0000,90.0000,0.9000,4,0.0000,0.0000,2.4000,0.0000,0.0000,0.0000,5.0543,1.3543,0.0000,5.0543,1.3543,2.4000
+Surface View Factor - Surface Information,SB43,Wall,12.3897,74.2152,90.0000,0.9000,4,9.0043,8.1959,2.4000,9.0043,8.1959,0.0000,7.6000,13.1636,0.0000,7.6000,13.1636,2.4000
+Surface View Factor - Surface Information,SB45,Wall,18.9600,120.0000,90.0000,0.9000,4,5.0543,1.3543,2.4000,5.0543,1.3543,0.0000,9.0043,8.1959,0.0000,9.0043,8.1959,2.4000
+Surface View Factor - Surface Information,F4-1,Floor,42.7350,120.0000,180.0000,0.9000,4,5.0543,1.3543,0.0000,0.0000,0.0000,0.0000,7.6000,13.1636,0.0000,9.0043,8.1959,0.0000
+Surface View Factor - Surface Information,C4-1,Roof,42.7350,300.0000,0.0000,0.6500,4,9.0043,8.1959,2.4000,7.6000,13.1636,2.4000,0.0000,0.0000,2.4000,5.0543,1.3543,2.4000
+Approximate or User Input ViewFactors,To Surface,Surface Class,RowSum,LEFT-1,WL-1,SB41,SB43,SB45,F4-1,C4-1
+View Factor,LEFT-1,Wall,1.0000,0.0000,0.0000,9.7066E-002,9.5763E-002,0.1465,0.3303,0.3303
+View Factor,WL-1,Window,1.0000,0.0000,0.0000,9.7066E-002,9.5763E-002,0.1465,0.3303,0.3303
+View Factor,SB41,Wall,1.0000,0.1785,5.9491E-002,0.0000,8.0820E-002,0.1237,0.2788,0.2788
+View Factor,SB43,Wall,1.0000,0.1783,5.9426E-002,8.1829E-002,0.0000,0.1235,0.2785,0.2785
+View Factor,SB45,Wall,1.0000,0.1863,6.2084E-002,8.5489E-002,8.4342E-002,0.0000,0.2909,0.2909
+View Factor,F4-1,Floor,1.0000,0.2222,7.4072E-002,0.1020,0.1006,0.1540,0.0000,0.3471
+View Factor,C4-1,Roof,1.0000,0.2222,7.4072E-002,0.1020,0.1006,0.1540,0.3471,0.0000
+Final ViewFactors,To Surface,Surface Class,RowSum,LEFT-1,WL-1,SB41,SB43,SB45,F4-1,C4-1
+View Factor,LEFT-1,Wall,1.0002,0.0000,0.0000,8.0758E-002,7.9598E-002,0.1268,0.3565,0.3565
+View Factor,WL-1,Window,1.0002,0.0000,0.0000,8.0758E-002,7.9598E-002,0.1268,0.3565,0.3565
+View Factor,SB41,Wall,1.0002,0.1759,5.8648E-002,0.0000,6.5543E-002,0.1047,0.2977,0.2977
+View Factor,SB43,Wall,1.0002,0.1758,5.8591E-002,6.6434E-002,0.0000,0.1046,0.2974,0.2974
+View Factor,SB45,Wall,1.0002,0.1830,6.0985E-002,6.9327E-002,6.8327E-002,0.0000,0.3093,0.3093
+View Factor,F4-1,Floor,0.9998,0.2283,7.6089E-002,8.7482E-002,8.6227E-002,0.1372,0.0000,0.3845
+View Factor,C4-1,Roof,0.9998,0.2283,7.6089E-002,8.7482E-002,8.6227E-002,0.1372,0.3845,0.0000
+Script F Factors,X Surface,LEFT-1,WL-1,SB41,SB43,SB45,F4-1,C4-1
+Script F Factor,LEFT-1,3.7839E-002,1.1772E-002,7.9829E-002,7.8690E-002,0.1248,0.3415,0.2257
+Script F Factor,WL-1,3.5317E-002,1.0987E-002,7.4507E-002,7.3444E-002,0.1165,0.3187,0.2107
+Script F Factor,SB41,0.1739,5.4108E-002,1.4080E-002,6.6623E-002,0.1059,0.2923,0.1932
+Script F Factor,SB43,0.1738,5.4062E-002,6.7529E-002,1.3873E-002,0.1058,0.2921,0.1931
+Script F Factor,SB45,0.1801,5.6024E-002,7.0123E-002,6.9119E-002,2.2407E-002,0.3025,0.2000
+Script F Factor,F4-1,0.2186,6.8022E-002,8.5903E-002,8.4679E-002,0.1342,6.6285E-002,0.2421
+Script F Factor,C4-1,0.1445,4.4965E-002,5.6785E-002,5.5976E-002,8.8712E-002,0.2421,1.6834E-002
+Surface View Factor - Zone/Enclosure Information,SPACE5-1,6
+Surface View Factor - Surface Information,SB51,Wall,55.4400,210.0000,90.0000,0.9000,4,5.0543,1.3543,2.4000,5.0543,1.3543,0.0000,25.0595,-10.1957,0.0000,25.0595,-10.1957,2.4000
+Surface View Factor - Surface Information,SB52,Wall,18.9600,120.0000,90.0000,0.9000,4,25.0595,-10.1957,2.4000,25.0595,-10.1957,0.0000,29.0095,-3.3541,0.0000,29.0095,-3.3541,2.4000
+Surface View Factor - Surface Information,SB53,Wall,55.4400,30.0000,90.0000,0.9000,4,29.0095,-3.3541,2.4000,29.0095,-3.3541,0.0000,9.0043,8.1959,0.0000,9.0043,8.1959,2.4000
+Surface View Factor - Surface Information,SB54,Wall,18.9600,300.0000,90.0000,0.9000,4,9.0043,8.1959,2.4000,9.0043,8.1959,0.0000,5.0543,1.3543,0.0000,5.0543,1.3543,2.4000
+Surface View Factor - Surface Information,F5-1,Floor,182.4900,30.0000,180.0000,0.9000,4,29.0095,-3.3541,0.0000,25.0595,-10.1957,0.0000,5.0543,1.3543,0.0000,9.0043,8.1959,0.0000
+Surface View Factor - Surface Information,C5-1,Roof,182.4900,210.0000,0.0000,0.6500,4,9.0043,8.1959,2.4000,5.0543,1.3543,2.4000,25.0595,-10.1957,2.4000,29.0095,-3.3541,2.4000
+Approximate or User Input ViewFactors,To Surface,Surface Class,RowSum,SB51,SB52,SB53,SB54,F5-1,C5-1
+View Factor,SB51,Wall,1.0000,0.0000,4.1367E-002,0.1210,4.1367E-002,0.3982,0.3982
+View Factor,SB52,Wall,1.0000,0.1120,0.0000,0.1120,3.8317E-002,0.3688,0.3688
+View Factor,SB53,Wall,1.0000,0.1210,4.1367E-002,0.0000,4.1367E-002,0.3982,0.3982
+View Factor,SB54,Wall,1.0000,0.1120,3.8317E-002,0.1120,0.0000,0.3688,0.3688
+View Factor,F5-1,Floor,1.0000,0.1673,5.7231E-002,0.1673,5.7231E-002,0.0000,0.5508
+View Factor,C5-1,Roof,1.0000,0.1673,5.7231E-002,0.1673,5.7231E-002,0.5508,0.0000
+Final ViewFactors,To Surface,Surface Class,RowSum,SB51,SB52,SB53,SB54,F5-1,C5-1
+View Factor,SB51,Wall,1.0002,0.0000,2.6720E-002,8.3114E-002,2.6720E-002,0.4318,0.4318
+View Factor,SB52,Wall,1.0002,7.8131E-002,0.0000,7.8131E-002,2.5072E-002,0.4094,0.4094
+View Factor,SB53,Wall,1.0002,8.3114E-002,2.6720E-002,0.0000,2.6720E-002,0.4318,0.4318
+View Factor,SB54,Wall,1.0002,7.8131E-002,2.5072E-002,7.8131E-002,0.0000,0.4094,0.4094
+View Factor,F5-1,Floor,0.9999,0.1312,4.2537E-002,0.1312,4.2537E-002,0.0000,0.6525
+View Factor,C5-1,Roof,0.9999,0.1312,4.2537E-002,0.1312,4.2537E-002,0.6525,0.0000
+Script F Factors,X Surface,SB51,SB52,SB53,SB54,F5-1,C5-1
+Script F Factor,SB51,2.4807E-002,2.9675E-002,9.1575E-002,2.9675E-002,0.4455,0.2790
+Script F Factor,SB52,8.6771E-002,7.8239E-003,8.6771E-002,2.8082E-002,0.4247,0.2660
+Script F Factor,SB53,9.1575E-002,2.9675E-002,2.4807E-002,2.9675E-002,0.4455,0.2790
+Script F Factor,SB54,8.6771E-002,2.8082E-002,8.6771E-002,7.8239E-003,0.4247,0.2660
+Script F Factor,F5-1,0.1353,4.4124E-002,0.1353,4.4124E-002,0.1416,0.3994
+Script F Factor,C5-1,8.4760E-002,2.7636E-002,8.4760E-002,2.7636E-002,0.3994,2.5742E-002
+! <Surface Convection Parameters>, Surface Name, Outside Model Assignment, Outside Area [m2], Outside Perimeter [m], Outside Height [m], Inside Model Assignment, Inside Height [m], Inside Perimeter Envelope [m], Inside Hydraulic Diameter [m], Window Wall Ratio, Window Location, Near Radiant {Yes/No}, Has Active HVAC {Yes/No}
+Surface Convection Parameters,WALL-1PF,0,91.50,67.00,3.00,0,0.61,91.40,14.85,0.00,0,No,No
+Surface Convection Parameters,WALL-1PR,0,45.60,80.55,3.00,0,0.61,91.40,14.85,0.00,0,No,No
+Surface Convection Parameters,WALL-1PB,0,91.50,80.55,3.00,0,0.61,91.40,14.85,0.00,0,No,No
+Surface Convection Parameters,WALL-1PL,0,45.60,36.40,3.00,0,0.61,91.40,14.85,0.00,0,No,No
+Surface Convection Parameters,C1-1P,0,0.00,0.00,0.00,0,0.61,91.40,14.85,0.00,0,No,No
+Surface Convection Parameters,C2-1P,0,0.00,0.00,0.00,0,0.61,91.40,14.85,0.00,0,No,No
+Surface Convection Parameters,C3-1P,0,0.00,0.00,0.00,0,0.61,91.40,14.85,0.00,0,No,No
+Surface Convection Parameters,C4-1P,0,0.00,0.00,0.00,0,0.61,91.40,14.85,0.00,0,No,No
+Surface Convection Parameters,C5-1P,0,0.00,0.00,0.00,0,0.61,91.40,14.85,0.00,0,No,No
+Surface Convection Parameters,TOP-1,0,463.60,91.40,0.00,0,0.61,91.40,14.85,0.00,0,No,No
+Surface Convection Parameters,FRONT-1,0,91.50,67.00,3.00,0,2.44,30.50,4.61,0.30,4,No,No
+Surface Convection Parameters,WF-1,0,91.50,67.00,3.00,0,2.44,30.50,4.61,0.30,2,No,No
+Surface Convection Parameters,DF-1,0,91.50,67.00,3.00,0,2.44,30.50,4.61,0.30,1,No,No
+Surface Convection Parameters,SB12,0,0.00,0.00,0.00,0,2.44,30.50,4.61,0.30,0,No,No
+Surface Convection Parameters,SB14,0,0.00,0.00,0.00,0,2.44,30.50,4.61,0.30,0,No,No
+Surface Convection Parameters,SB15,0,0.00,0.00,0.00,0,2.44,30.50,4.61,0.30,0,No,No
+Surface Convection Parameters,F1-1,0,0.00,0.00,0.00,0,2.44,30.50,4.61,0.30,0,No,No
+Surface Convection Parameters,C1-1,0,0.00,0.00,0.00,0,2.44,30.50,4.61,0.30,0,No,No
+Surface Convection Parameters,RIGHT-1,0,45.60,80.55,3.00,0,2.44,15.20,3.86,0.25,3,No,No
+Surface Convection Parameters,WR-1,0,45.60,80.55,3.00,0,2.44,15.20,3.86,0.25,2,No,No
+Surface Convection Parameters,SB21,0,0.00,0.00,0.00,0,2.44,15.20,3.86,0.25,0,No,No
+Surface Convection Parameters,SB23,0,0.00,0.00,0.00,0,2.44,15.20,3.86,0.25,0,No,No
+Surface Convection Parameters,SB25,0,0.00,0.00,0.00,0,2.44,15.20,3.86,0.25,0,No,No
+Surface Convection Parameters,F2-1,0,0.00,0.00,0.00,0,2.44,15.20,3.86,0.25,0,No,No
+Surface Convection Parameters,C2-1,0,0.00,0.00,0.00,0,2.44,15.20,3.86,0.25,0,No,No
+Surface Convection Parameters,BACK-1,0,91.50,80.55,3.00,0,2.44,30.50,4.49,0.28,4,No,No
+Surface Convection Parameters,WB-1,0,91.50,80.55,3.00,0,2.44,30.50,4.49,0.28,2,No,No
+Surface Convection Parameters,DB-1,0,91.50,80.55,3.00,0,2.44,30.50,4.49,0.28,1,No,No
+Surface Convection Parameters,SB32,0,0.00,0.00,0.00,0,2.44,30.50,4.49,0.28,0,No,No
+Surface Convection Parameters,SB34,0,0.00,0.00,0.00,0,2.44,30.50,4.49,0.28,0,No,No
+Surface Convection Parameters,SB35,0,0.00,0.00,0.00,0,2.44,30.50,4.49,0.28,0,No,No
+Surface Convection Parameters,F3-1,0,0.00,0.00,0.00,0,2.44,30.50,4.49,0.28,0,No,No
+Surface Convection Parameters,C3-1,0,0.00,0.00,0.00,0,2.44,30.50,4.49,0.28,0,No,No
+Surface Convection Parameters,LEFT-1,0,45.60,36.40,3.00,0,2.44,15.20,3.86,0.25,3,No,No
+Surface Convection Parameters,WL-1,0,45.60,36.40,3.00,0,2.44,15.20,3.86,0.25,2,No,No
+Surface Convection Parameters,SB41,0,0.00,0.00,0.00,0,2.44,15.20,3.86,0.25,0,No,No
+Surface Convection Parameters,SB43,0,0.00,0.00,0.00,0,2.44,15.20,3.86,0.25,0,No,No
+Surface Convection Parameters,SB45,0,0.00,0.00,0.00,0,2.44,15.20,3.86,0.25,0,No,No
+Surface Convection Parameters,F4-1,0,0.00,0.00,0.00,0,2.44,15.20,3.86,0.25,0,No,No
+Surface Convection Parameters,C4-1,0,0.00,0.00,0.00,0,2.44,15.20,3.86,0.25,0,No,No
+Surface Convection Parameters,SB51,0,0.00,0.00,0.00,0,2.44,0.00,8.62,-999.00,0,No,No
+Surface Convection Parameters,SB52,0,0.00,0.00,0.00,0,2.44,0.00,8.62,-999.00,0,No,No
+Surface Convection Parameters,SB53,0,0.00,0.00,0.00,0,2.44,0.00,8.62,-999.00,0,No,No
+Surface Convection Parameters,SB54,0,0.00,0.00,0.00,0,2.44,0.00,8.62,-999.00,0,No,No
+Surface Convection Parameters,F5-1,0,0.00,0.00,0.00,0,2.44,0.00,8.62,-999.00,0,No,No
+Surface Convection Parameters,C5-1,0,0.00,0.00,0.00,0,2.44,0.00,8.62,-999.00,0,No,No
+! <ZoneInfiltration Airflow Stats Nominal>,Name,Schedule Name,Zone Name, Zone Floor Area {m2}, # Zone Occupants,Design Volume Flow Rate {m3/s},Volume Flow Rate/Floor Area {m3/s-m2},Volume Flow Rate/Exterior Surface Area {m3/s-m2},ACH - Air Changes per Hour,Equation A - Constant Term Coefficient {},Equation B - Temperature Term Coefficient {1/C},Equation C - Velocity Term Coefficient {s/m}, Equation D - Velocity Squared Term Coefficient {s2/m2}
+ ZoneInfiltration Airflow Stats Nominal, SPACE1-1 INFIL 1,INFIL-SCH,SPACE1-1,99.16,11.0,3.200E-002,3.227E-004,4.372E-004,0.482,0.000,0.000,0.224,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE2-1 INFIL 1,INFIL-SCH,SPACE2-1,42.74,5.0,1.400E-002,3.276E-004,3.838E-004,0.488,0.000,0.000,0.224,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE3-1 INFIL 1,INFIL-SCH,SPACE3-1,96.48,11.0,3.200E-002,3.317E-004,4.372E-004,0.482,0.000,0.000,0.224,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE4-1 INFIL 1,INFIL-SCH,SPACE4-1,42.74,5.0,1.400E-002,3.276E-004,3.838E-004,0.488,0.000,0.000,0.224,0.000
+ ZoneInfiltration Airflow Stats Nominal, SPACE5-1 INFIL 1,INFIL-SCH,SPACE5-1,182.49,20.0,6.200E-002,3.397E-004,N/A,0.499,0.000,0.000,0.224,0.000
+! <AirFlow Model>, Simple
+ AirFlow Model, Simple
+! <RoomAir Model>, Zone Name, Mixing/Mundt/UCSDDV/UCSDCV/UCSDUFI/UCSDUFE/User Defined
+RoomAir Model,PLENUM-1,Mixing/Well-Stirred
+RoomAir Model,SPACE1-1,Mixing/Well-Stirred
+RoomAir Model,SPACE2-1,Mixing/Well-Stirred
+RoomAir Model,SPACE3-1,Mixing/Well-Stirred
+RoomAir Model,SPACE4-1,Mixing/Well-Stirred
+RoomAir Model,SPACE5-1,Mixing/Well-Stirred
+! <AirflowNetwork Model:Control>, No Multizone or Distribution/Multizone with Distribution/Multizone without Distribution/Multizone with Distribution only during Fan Operation
+AirflowNetwork Model:Control,NoMultizoneOrDistribution
+! <Zone Volume Capacitance Multiplier>, Sensible Heat Capacity Multiplier, Moisture Capacity Multiplier, Carbon Dioxide Capacity Multiplier, Generic Contaminant Capacity Multiplier
+Zone Volume Capacitance Multiplier,   1.000 ,   1.000,   1.000,   1.000
+! <Load Timesteps in Zone Design Calculation Averaging Window>, Value
+ Load Timesteps in Zone Design Calculation Averaging Window,    4
+! <Heating Sizing Factor Information>, Sizing Factor ID, Value
+ Heating Sizing Factor Information, Global,   1.0000    
+! <Cooling Sizing Factor Information>, Sizing Factor ID, Value
+ Cooling Sizing Factor Information, Global,   1.0000    
+! <Radiant to Convective Decay Curves for Cooling>,Zone Name, Surface Name, Time 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36
+! <Radiant to Convective Decay Curves for Heating>,Zone Name, Surface Name, Time 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36
+Radiant to Convective Decay Curves for Cooling,PLENUM-1,WALL-1PF, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Cooling,PLENUM-1,WALL-1PR, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Cooling,PLENUM-1,WALL-1PB, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Cooling,PLENUM-1,WALL-1PL, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Cooling,PLENUM-1,C1-1P, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Cooling,PLENUM-1,C2-1P, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Cooling,PLENUM-1,C3-1P, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Cooling,PLENUM-1,C4-1P, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Cooling,PLENUM-1,C5-1P, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Cooling,PLENUM-1,TOP-1, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Heating,PLENUM-1,WALL-1PF, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Heating,PLENUM-1,WALL-1PR, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Heating,PLENUM-1,WALL-1PB, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Heating,PLENUM-1,WALL-1PL, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Heating,PLENUM-1,C1-1P, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Heating,PLENUM-1,C2-1P, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Heating,PLENUM-1,C3-1P, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Heating,PLENUM-1,C4-1P, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Heating,PLENUM-1,C5-1P, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Heating,PLENUM-1,TOP-1, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+Radiant to Convective Decay Curves for Cooling,SPACE1-1,FRONT-1, 0.257, 0.158, 0.108, 0.076, 0.057, 0.044, 0.036, 0.030, 0.026, 0.023, 0.020, 0.018, 0.017, 0.015, 0.014, 0.013, 0.012, 0.011, 0.011, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.006, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE1-1,WF-1, 0.242, 0.121, 0.047, 0.037, 0.029, 0.025, 0.021, 0.019, 0.016, 0.015, 0.013, 0.012, 0.011, 0.010, 0.010, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.006, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004, 0.003, 0.003, 0.003, 0.003, 0.003, 0.003
+Radiant to Convective Decay Curves for Cooling,SPACE1-1,DF-1, 0.126, 0.064, 0.025, 0.019, 0.015, 0.013, 0.011, 0.010, 0.008, 0.008, 0.007, 0.006, 0.006, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004, 0.003, 0.003, 0.003, 0.003, 0.003, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.001, 0.001, 0.001
+Radiant to Convective Decay Curves for Cooling,SPACE1-1,SB12, 0.239, 0.150, 0.110, 0.082, 0.063, 0.050, 0.040, 0.033, 0.028, 0.024, 0.021, 0.019, 0.017, 0.016, 0.014, 0.013, 0.012, 0.011, 0.011, 0.010, 0.009, 0.009, 0.008, 0.007, 0.007, 0.007, 0.006, 0.006, 0.005, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE1-1,SB14, 0.240, 0.150, 0.110, 0.083, 0.064, 0.050, 0.041, 0.033, 0.029, 0.025, 0.022, 0.019, 0.017, 0.016, 0.014, 0.013, 0.012, 0.011, 0.011, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.005, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE1-1,SB15, 0.243, 0.157, 0.115, 0.086, 0.065, 0.051, 0.042, 0.034, 0.029, 0.025, 0.022, 0.020, 0.018, 0.017, 0.015, 0.014, 0.013, 0.012, 0.011, 0.011, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.006, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE1-1,F1-1, 0.028, 0.015, 0.013, 0.011, 0.010, 0.009, 0.008, 0.007, 0.006, 0.006, 0.005, 0.004, 0.004, 0.004, 0.003, 0.003, 0.003, 0.003, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001
+Radiant to Convective Decay Curves for Cooling,SPACE1-1,C1-1, 0.272, 0.068, 0.057, 0.046, 0.041, 0.037, 0.034, 0.030, 0.030, 0.026, 0.024, 0.023, 0.022, 0.020, 0.019, 0.018, 0.017, 0.016, 0.015, 0.014, 0.013, 0.012, 0.012, 0.011, 0.010, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.006, 0.005
+Radiant to Convective Decay Curves for Heating,SPACE1-1,FRONT-1,-173.639,-143.630,-120.077,-3146.829,445.331,239.025,124.605,59.992,23.996, 4.325,-6.192,-11.595,-14.200,-15.227,-15.389,-15.087,-14.549,-13.901,-13.213,-12.523,-11.853,-11.211,-10.603,-10.029,-9.490,-8.983,-8.565,-8.167,946.981,-4770.775,702.602,-4178.779,958.592,-3927.079,1076.259,-3804.743
+Radiant to Convective Decay Curves for Heating,SPACE1-1,WF-1,-112.079,-93.911,-79.442,-3228.817,348.101,38.291,11.582,-2.243,-8.714,-11.759,-12.966,-13.238,-13.024,-12.601,-12.043,-11.435,-10.820,-10.218,-9.643,-9.098,-8.586,-8.106,-7.657,-7.237,-6.845,-6.477,-6.133,-5.846,1039.291,-4957.930,660.876,-4716.157,665.147,-4617.967,673.568,-4560.476
+Radiant to Convective Decay Curves for Heating,SPACE1-1,DF-1,-66.209,-55.177,-46.447,-3721.557,190.173,24.335,11.362, 2.190,-2.839,-5.416,-6.599,-7.032,-7.066,-6.909,-6.645,-6.333,-6.005,-5.677,-5.360,-5.059,-4.774,-4.507,-4.256,-4.022,-3.803,-3.598,-3.406,-3.240,1215.497,-5638.490,407.833,-5518.233,336.307,-5461.613,311.529,-5428.301
+Radiant to Convective Decay Curves for Heating,SPACE1-1,SB12,-234.245,-185.542,-149.262,-3277.054,235.499,68.049, 6.875,-16.863,-25.733,-28.299,-28.164,-26.874,-25.177,-23.359,-21.571,-19.883,-18.325,-16.905,-15.619,-14.459,-13.413,-12.468,-11.614,-10.841,-10.137,-9.496,-8.966,-8.473,1028.626,-4704.625,779.571,-4114.493,1048.880,-3840.772,1189.117,-3698.564
+Radiant to Convective Decay Curves for Heating,SPACE1-1,SB14,-200.870,-162.079,-132.568,-3264.864,244.931,75.258,12.349,-12.684,-22.510,-25.784,-26.179,-25.290,-23.901,-22.323,-20.724,-19.187,-17.751,-16.430,-15.226,-14.132,-13.141,-12.242,-11.426,-10.683,-10.006,-9.387,-8.874,-8.397,993.387,-4789.813,753.556,-4173.224,1045.184,-3881.998,1197.705,-3730.754
+Radiant to Convective Decay Curves for Heating,SPACE1-1,SB15,-212.008,-170.501,-139.294,-3253.935,292.984,128.132,55.340,18.774,-0.557,-10.844,-16.172,-18.673,-19.587,-19.565,-19.018,-18.193,-17.241,-16.251,-15.272,-14.333,-13.447,-12.619,-11.849,-11.136,-10.475,-9.864,-9.354,-8.875,1005.994,-4764.698,716.922,-4155.232,992.020,-3941.306,1140.098,-3788.295
+Radiant to Convective Decay Curves for Heating,SPACE1-1,F1-1,-70.409,-59.772,-50.769,-1222.988,-6.510,-8.427,-7.778,-7.156,-6.528,-5.931,-5.393,-4.915,-4.498,-4.126,-3.796,-3.501,-3.237,-2.999,-2.785,-2.592,-2.416,-2.256,-2.111,-1.977,-1.855,-1.743,-1.644,-1.553,1547.109,-2077.481,224.002,-1954.555,186.088,-1870.131,210.805,-1810.398
+Radiant to Convective Decay Curves for Heating,SPACE1-1,C1-1,-324.523,-292.566,-264.527,-3793.471,-12.625,-85.688,-110.990,-121.001,-124.472,-123.002,-119.415,-114.826,-110.342,-105.357,-100.383,-95.529,-90.849,-86.370,-82.101,-78.041,-74.185,-70.524,-67.050,-63.752,-60.623,-57.653,-55.303,-52.888,2176.758,-5408.369,2075.605,-5095.030,2180.435,-4956.180,2256.906,-4851.655
+Radiant to Convective Decay Curves for Cooling,SPACE2-1,RIGHT-1, 0.257, 0.160, 0.110, 0.078, 0.058, 0.046, 0.037, 0.031, 0.027, 0.024, 0.021, 0.019, 0.017, 0.016, 0.015, 0.014, 0.012, 0.012, 0.011, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.006, 0.005, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE2-1,WR-1, 0.233, 0.120, 0.050, 0.039, 0.031, 0.026, 0.022, 0.019, 0.017, 0.015, 0.014, 0.013, 0.012, 0.011, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.006, 0.006, 0.006, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004, 0.003, 0.003, 0.003, 0.003, 0.003, 0.003
+Radiant to Convective Decay Curves for Cooling,SPACE2-1,SB21, 0.242, 0.157, 0.118, 0.089, 0.068, 0.054, 0.043, 0.036, 0.030, 0.026, 0.023, 0.020, 0.018, 0.017, 0.015, 0.014, 0.013, 0.012, 0.011, 0.010, 0.010, 0.009, 0.008, 0.008, 0.007, 0.007, 0.007, 0.006, 0.006, 0.005, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE2-1,SB23, 0.242, 0.157, 0.117, 0.088, 0.068, 0.053, 0.043, 0.035, 0.030, 0.026, 0.023, 0.020, 0.018, 0.017, 0.015, 0.014, 0.013, 0.012, 0.011, 0.010, 0.010, 0.009, 0.008, 0.008, 0.007, 0.007, 0.007, 0.006, 0.006, 0.005, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE2-1,SB25, 0.244, 0.162, 0.122, 0.091, 0.069, 0.054, 0.044, 0.036, 0.031, 0.027, 0.024, 0.021, 0.019, 0.017, 0.016, 0.015, 0.014, 0.013, 0.012, 0.011, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.007, 0.006, 0.006, 0.005, 0.005, 0.005, 0.005, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE2-1,F2-1, 0.113, 0.061, 0.050, 0.043, 0.037, 0.033, 0.029, 0.026, 0.023, 0.020, 0.018, 0.016, 0.015, 0.013, 0.012, 0.011, 0.010, 0.009, 0.008, 0.002, 0.002, 0.002, 0.002, 0.002, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001
+Radiant to Convective Decay Curves for Cooling,SPACE2-1,C2-1, 0.276, 0.073, 0.061, 0.050, 0.044, 0.040, 0.037, 0.034, 0.032, 0.030, 0.028, 0.026, 0.025, 0.023, 0.022, 0.020, 0.018, 0.018, 0.016, 0.015, 0.014, 0.013, 0.013, 0.012, 0.011, 0.010, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.007, 0.006, 0.006
+Radiant to Convective Decay Curves for Heating,SPACE2-1,RIGHT-1,-256.261,-205.032,-166.793,2356.561,-608.502,-394.212,-264.150,-184.719,-134.888,-102.498,-80.669,-65.380,-54.425,-46.125,-39.648,-34.467,-30.241,-26.738,-23.798,-21.306,-19.175,-17.341,-15.753,-14.369,-13.157,-12.091,-11.214,-10.431,-5030.773,488.637,-4439.799,838.824,-4173.700,976.358,-4038.437,1045.863
+Radiant to Convective Decay Curves for Heating,SPACE2-1,WR-1,-155.375,-127.949,-106.502,2566.027,-509.998,-161.005,-111.807,-87.316,-69.731,-57.197,-47.804,-40.546,-34.797,-30.239,-26.451,-23.293,-20.637,-18.386,-16.464,-14.815,-13.390,-12.154,-11.077,-10.133,-9.302,-8.568,-7.916,-7.374,-5230.917,317.270,-5108.019,428.587,-4997.951,467.790,-4934.182,491.357
+Radiant to Convective Decay Curves for Heating,SPACE2-1,SB21,-281.855,-222.382,-178.266,2463.639,-398.597,-213.848,-137.139,-101.001,-80.673,-67.186,-57.231,-49.409,-43.188,-37.973,-33.569,-29.826,-26.626,-23.878,-21.507,-19.453,-17.666,-16.105,-14.736,-13.529,-12.462,-11.514,-10.732,-10.024,-5184.079,307.778,-4595.110,745.839,-4231.229,967.059,-4033.021,1082.313
+Radiant to Convective Decay Curves for Heating,SPACE2-1,SB23,-271.925,-215.483,-173.402,2451.851,-450.883,-268.802,-180.464,-132.036,-102.072,-81.725,-67.082,-56.108,-47.784,-41.166,-35.819,-31.438,-27.801,-24.749,-22.163,-19.955,-18.056,-16.411,-14.978,-13.723,-12.618,-11.640,-10.833,-10.106,-5183.765,309.323,-4592.924,749.293,-4227.286,972.064,-4027.802,1088.366
+Radiant to Convective Decay Curves for Heating,SPACE2-1,SB25,-293.668,-230.890,-184.703,2419.296,-537.796,-355.796,-247.635,-179.540,-134.631,-103.918,-82.346,-66.802,-55.469,-46.849,-40.150,-34.835,-30.536,-27.002,-24.056,-21.571,-19.453,-17.632,-16.055,-14.680,-13.474,-12.410,-11.530,-10.741,-5146.990,400.863,-4546.539,845.278,-4205.444,973.149,-4018.618,1086.618
+Radiant to Convective Decay Curves for Heating,SPACE2-1,F2-1,-100.114,-84.689,-71.657,2314.314,-90.663,-73.344,-60.940,-51.273,-43.327,-36.686,-31.112,-26.426,-22.502,-19.190,-16.398,-14.043,-12.056,-10.377,-8.958,-7.757,-6.739,-5.874,-5.140,-4.514,-3.980,-3.523,-3.136,-2.805,-2435.964,-346.194,-2270.351,-240.528,-2157.881,-189.070,-2078.469,-147.746
+Radiant to Convective Decay Curves for Heating,SPACE2-1,C2-1,-402.023,-356.502,-317.981,3937.136,-475.961,-359.077,-294.618,-252.923,-222.975,-199.205,-180.106,-164.297,-151.979,-140.468,-130.334,-121.331,-113.265,-105.986,-99.378,-93.347,-87.819,-82.730,-78.031,-73.676,-69.630,-65.860,-62.862,-59.861,-5847.707,1919.595,-5503.952,2129.907,-5307.649,2233.244,-5167.905,2304.599
+Radiant to Convective Decay Curves for Cooling,SPACE3-1,BACK-1, 0.257, 0.157, 0.107, 0.075, 0.056, 0.043, 0.035, 0.030, 0.026, 0.023, 0.021, 0.018, 0.017, 0.015, 0.015, 0.013, 0.012, 0.011, 0.011, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.006, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE3-1,WB-1, 0.235, 0.121, 0.047, 0.037, 0.029, 0.024, 0.021, 0.018, 0.016, 0.015, 0.014, 0.013, 0.011, 0.011, 0.010, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.006, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004, 0.003, 0.003, 0.003, 0.003, 0.003, 0.003
+Radiant to Convective Decay Curves for Cooling,SPACE3-1,DB-1, 0.121, 0.067, 0.036, 0.020, 0.015, 0.013, 0.011, 0.009, 0.009, 0.008, 0.007, 0.007, 0.006, 0.006, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004, 0.003, 0.003, 0.003, 0.003, 0.003, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.001, 0.001, 0.001
+Radiant to Convective Decay Curves for Cooling,SPACE3-1,SB32, 0.240, 0.150, 0.110, 0.082, 0.063, 0.049, 0.040, 0.033, 0.028, 0.024, 0.022, 0.019, 0.017, 0.016, 0.015, 0.013, 0.012, 0.011, 0.011, 0.010, 0.009, 0.009, 0.008, 0.007, 0.007, 0.007, 0.006, 0.006, 0.005, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE3-1,SB34, 0.240, 0.151, 0.110, 0.083, 0.063, 0.050, 0.040, 0.033, 0.028, 0.025, 0.022, 0.019, 0.018, 0.016, 0.015, 0.013, 0.012, 0.011, 0.011, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.006, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE3-1,SB35, 0.243, 0.157, 0.115, 0.085, 0.065, 0.051, 0.041, 0.034, 0.029, 0.026, 0.023, 0.020, 0.019, 0.017, 0.016, 0.014, 0.013, 0.012, 0.011, 0.011, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.006, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE3-1,F3-1, 0.028, 0.062, 0.050, 0.043, 0.037, 0.032, 0.028, 0.006, 0.006, 0.005, 0.005, 0.004, 0.004, 0.004, 0.003, 0.003, 0.003, 0.003, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001
+Radiant to Convective Decay Curves for Cooling,SPACE3-1,C3-1, 0.269, 0.068, 0.056, 0.046, 0.041, 0.037, 0.034, 0.032, 0.030, 0.028, 0.026, 0.023, 0.023, 0.020, 0.020, 0.018, 0.017, 0.016, 0.015, 0.014, 0.013, 0.012, 0.012, 0.011, 0.010, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.006, 0.005
+Radiant to Convective Decay Curves for Heating,SPACE3-1,BACK-1,-158.586,-132.839,-112.111,-1637.348,185.512,85.569,31.417, 2.428,-12.500,-19.516,-22.280,-22.818,-22.312,-21.263,-19.996,-18.680,-17.400,-16.195,-15.080,-14.056,-13.120,-12.265,-11.483,-10.767,-10.111,-9.507,-9.010,-8.545,917.014,-4821.067,672.531,-4215.499,933.769,-3956.764,1053.750,-3830.438
+Radiant to Convective Decay Curves for Heating,SPACE3-1,WB-1,-105.209,-88.585,-75.256,-1665.953,149.112,-2.505,-15.845,-20.746,-21.702,-21.158,-19.950,-18.547,-17.140,-15.857,-14.650,-13.546,-12.544,-11.638,-10.819,-10.078,-9.405,-8.794,-8.236,-7.726,-7.258,-6.828,-6.431,-6.101,1008.651,-5012.474,624.245,-4763.127,629.080,-4661.095,637.159,-4601.357
+Radiant to Convective Decay Curves for Heating,SPACE3-1,DB-1,-61.953,-51.934,-43.929,-1900.314,85.960, 5.818,-4.509,-9.393,-11.125,-11.394,-10.995,-10.334,-9.598,-8.891,-8.220,-7.600,-7.035,-6.522,-6.059,-5.639,-5.258,-4.913,-4.598,-4.310,-4.047,-3.805,-3.582,-3.391,1179.810,-5703.578,359.221,-5579.394,285.349,-5520.542,258.812,-5485.912
+Radiant to Convective Decay Curves for Heating,SPACE3-1,SB32,-221.572,-176.520,-142.713,-1726.012,30.072,-49.785,-66.498,-64.238,-57.202,-49.664,-42.956,-37.313,-32.712,-28.903,-25.729,-23.060,-20.795,-18.855,-17.181,-15.724,-14.448,-13.323,-12.325,-11.435,-10.637,-9.918,-9.325,-8.780,998.533,-4755.640,748.417,-4152.560,1022.652,-3871.881,1165.168,-3725.700
+Radiant to Convective Decay Curves for Heating,SPACE3-1,SB34,-187.823,-152.791,-125.829,-1713.668,39.624,-42.485,-60.955,-60.006,-53.938,-47.118,-40.947,-35.711,-31.422,-27.855,-24.872,-22.356,-20.214,-18.375,-16.783,-15.394,-14.173,-13.094,-12.134,-11.276,-10.504,-9.807,-9.232,-8.702,962.870,-4841.859,722.086,-4212.001,1018.911,-3913.604,1173.860,-3758.278
+Radiant to Convective Decay Curves for Heating,SPACE3-1,SB35,-199.390,-161.490,-132.732,-1702.920,90.724,13.510,-15.473,-26.718,-30.695,-31.296,-30.353,-28.715,-26.872,-24.958,-23.091,-21.329,-19.697,-18.204,-16.847,-15.617,-14.503,-13.495,-12.581,-11.751,-10.995,-10.304,-9.730,-9.198,975.510,-4816.466,684.704,-4194.085,964.554,-3974.091,1114.857,-3817.104
+Radiant to Convective Decay Curves for Heating,SPACE3-1,F3-1,-65.604,-55.754,-47.410,-637.740,-19.431,-18.032,-15.845,-13.886,-12.171,-10.668,-9.369,-8.251,-7.298,-6.475,-5.765,-5.152,-4.620,-4.158,-3.756,-3.405,-3.098,-2.828,-2.590,-2.379,-2.192,-2.025,-1.881,-1.752,1500.721,-2115.237,158.873,-1989.020,119.498,-1902.213,143.783,-1840.761
+Radiant to Convective Decay Curves for Heating,SPACE3-1,C3-1,-316.400,-286.637,-260.164,-2030.630,-115.257,-144.671,-150.272,-148.342,-144.113,-137.594,-130.586,-123.605,-117.510,-111.229,-105.268,-99.645,-94.357,-89.387,-84.717,-80.326,-76.192,-72.299,-68.627,-65.162,-61.888,-58.794,-56.343,-53.838,2167.790,-5464.404,2069.419,-5140.211,2177.397,-4996.235,2255.479,-4888.416
+Radiant to Convective Decay Curves for Cooling,SPACE4-1,LEFT-1, 0.259, 0.162, 0.112, 0.081, 0.061, 0.048, 0.039, 0.033, 0.028, 0.025, 0.022, 0.020, 0.018, 0.016, 0.015, 0.014, 0.013, 0.012, 0.011, 0.010, 0.010, 0.009, 0.009, 0.008, 0.007, 0.007, 0.007, 0.006, 0.006, 0.005, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE4-1,WL-1, 0.242, 0.123, 0.052, 0.041, 0.032, 0.027, 0.023, 0.020, 0.018, 0.016, 0.015, 0.013, 0.012, 0.011, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004, 0.003, 0.003, 0.003, 0.003, 0.003, 0.003
+Radiant to Convective Decay Curves for Cooling,SPACE4-1,SB41, 0.243, 0.159, 0.119, 0.090, 0.070, 0.055, 0.044, 0.037, 0.031, 0.027, 0.023, 0.021, 0.019, 0.017, 0.016, 0.014, 0.013, 0.012, 0.011, 0.011, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.006, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE4-1,SB43, 0.242, 0.158, 0.118, 0.090, 0.069, 0.054, 0.044, 0.036, 0.031, 0.027, 0.023, 0.021, 0.019, 0.017, 0.016, 0.014, 0.013, 0.012, 0.011, 0.011, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.005, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE4-1,SB45, 0.245, 0.164, 0.123, 0.092, 0.071, 0.056, 0.045, 0.037, 0.032, 0.028, 0.024, 0.022, 0.019, 0.018, 0.016, 0.015, 0.014, 0.013, 0.012, 0.011, 0.010, 0.010, 0.009, 0.008, 0.008, 0.007, 0.007, 0.007, 0.006, 0.006, 0.005, 0.005, 0.005, 0.005, 0.004, 0.004
+Radiant to Convective Decay Curves for Cooling,SPACE4-1,F4-1, 0.028, 0.016, 0.013, 0.011, 0.010, 0.009, 0.008, 0.007, 0.006, 0.006, 0.005, 0.005, 0.004, 0.004, 0.004, 0.003, 0.003, 0.003, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.001, 0.001, 0.001, 0.005, 0.004, 0.004, 0.004, 0.003, 0.003, 0.003, 0.003
+Radiant to Convective Decay Curves for Cooling,SPACE4-1,C4-1, 0.281, 0.075, 0.063, 0.051, 0.045, 0.041, 0.038, 0.035, 0.031, 0.030, 0.027, 0.025, 0.024, 0.022, 0.021, 0.020, 0.018, 0.017, 0.016, 0.015, 0.014, 0.013, 0.013, 0.012, 0.011, 0.010, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.006
+Radiant to Convective Decay Curves for Heating,SPACE4-1,LEFT-1,-184.993,-152.990,-127.800,2364.821,-581.533,-373.582,-248.062,-171.959,-124.642,-94.194,-73.890,-59.816,-49.824,-42.313,-36.485,-31.839,-28.054,-24.917,-22.281,-20.042,-18.121,-16.462,-15.020,-13.757,-12.647,-11.665,-10.858,-10.133,-842.572,-4870.018,653.518,-4370.666,904.850,-4142.184,1019.276,-4021.661
+Radiant to Convective Decay Curves for Heating,SPACE4-1,WL-1,-120.017,-100.313,-84.683,2560.661,-493.918,-149.432,-102.451,-79.538,-63.320,-51.909,-43.432,-36.924,-31.790,-27.733,-24.364,-21.553,-19.186,-17.175,-15.453,-13.970,-12.685,-11.565,-10.585,-9.721,-8.958,-8.280,-7.676,-7.173,-876.921,-5112.636,415.515,-5073.335,468.848,-4976.966,490.913,-4913.176
+Radiant to Convective Decay Curves for Heating,SPACE4-1,SB41,-218.298,-176.008,-143.837,2467.428,-375.798,-196.698,-123.921,-90.621,-72.418,-60.553,-51.859,-45.029,-39.585,-35.000,-31.110,-27.787,-24.933,-22.470,-20.335,-18.476,-16.852,-15.426,-14.169,-13.056,-12.067,-11.184,-10.456,-9.793,-878.370,-5040.801,563.837,-4485.202,894.440,-4183.123,1066.235,-4019.693
+Radiant to Convective Decay Curves for Heating,SPACE4-1,SB43,-208.398,-169.130,-138.988,2455.632,-428.086,-251.652,-167.245,-121.656,-93.817,-75.093,-61.710,-51.728,-44.182,-38.194,-33.361,-29.400,-26.108,-23.341,-20.991,-18.978,-17.241,-15.731,-14.411,-13.249,-12.222,-11.309,-10.557,-9.875,-878.025,-5039.356,566.083,-4481.835,898.455,-4178.200,1071.531,-4013.721
+Radiant to Convective Decay Curves for Heating,SPACE4-1,SB45,-230.582,-184.806,-150.442,2423.000,-515.030,-338.645,-234.395,-169.131,-126.342,-97.252,-76.942,-62.393,-51.840,-43.854,-37.672,-32.779,-28.828,-25.582,-22.873,-20.585,-18.631,-16.946,-15.483,-14.202,-13.075,-12.076,-11.251,-10.508,-841.009,-4944.213,611.427,-4383.094,918.653,-4174.562,1078.847,-4013.093
+Radiant to Convective Decay Curves for Heating,SPACE4-1,F4-1,-75.908,-64.412,-54.680,2337.948,-78.693,-63.324,-52.560,-44.263,-37.465,-31.785,-27.015,-23.001,-19.637,-16.795,-14.395,-12.369,-10.656,-9.207,-7.980,-6.939,-6.055,-5.303,-4.662,-4.114,-3.646,-3.244,-2.903,-2.610,-811.138,-2356.784,-218.617,-2219.526,-188.323,-2122.780,-148.537,-2054.084
+Radiant to Convective Decay Curves for Heating,SPACE4-1,C4-1,-351.267,-316.979,-286.756,3937.156,-454.540,-341.950,-280.758,-241.553,-213.641,-191.511,-173.743,-159.023,-147.540,-136.770,-127.254,-118.763,-111.122,-104.198,-97.885,-92.101,-86.778,-81.861,-77.304,-73.069,-69.123,-65.437,-62.508,-59.565,-1005.205,-5743.012,2055.701,-5438.277,2197.798,-5285.763,2290.652,-5170.388
+Radiant to Convective Decay Curves for Cooling,SPACE5-1,SB51, 0.222, 0.128, 0.088, 0.066, 0.051, 0.041, 0.033, 0.028, 0.024, 0.021, 0.019, 0.017, 0.015, 0.014, 0.013, 0.012, 0.011, 0.010, 0.010, 0.009, 0.008, 0.008, 0.007, 0.007, 0.007, 0.006, 0.006, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004, 0.004, 0.003
+Radiant to Convective Decay Curves for Cooling,SPACE5-1,SB52, 0.221, 0.126, 0.087, 0.065, 0.050, 0.040, 0.033, 0.027, 0.024, 0.021, 0.018, 0.017, 0.015, 0.014, 0.013, 0.012, 0.011, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.006, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004, 0.003, 0.003
+Radiant to Convective Decay Curves for Cooling,SPACE5-1,SB53, 0.222, 0.127, 0.088, 0.066, 0.051, 0.040, 0.033, 0.028, 0.024, 0.021, 0.019, 0.017, 0.015, 0.014, 0.013, 0.012, 0.011, 0.010, 0.010, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.006, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004, 0.004, 0.003
+Radiant to Convective Decay Curves for Cooling,SPACE5-1,SB54, 0.222, 0.126, 0.087, 0.066, 0.051, 0.040, 0.033, 0.028, 0.024, 0.021, 0.019, 0.017, 0.015, 0.014, 0.013, 0.012, 0.011, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.006, 0.006, 0.006, 0.005, 0.005, 0.005, 0.004, 0.004, 0.004, 0.004, 0.003, 0.003
+Radiant to Convective Decay Curves for Cooling,SPACE5-1,F5-1, 0.026, 0.013, 0.010, 0.009, 0.008, 0.007, 0.007, 0.006, 0.005, 0.005, 0.004, 0.004, 0.004, 0.003, 0.003, 0.003, 0.003, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001
+Radiant to Convective Decay Curves for Cooling,SPACE5-1,C5-1, 0.778, 0.143, 0.110, 0.034, 0.030, 0.028, 0.026, 0.024, 0.022, 0.021, 0.020, 0.018, 0.017, 0.016, 0.015, 0.014, 0.013, 0.013, 0.012, 0.011, 0.011, 0.010, 0.009, 0.009, 0.008, 0.008, 0.007, 0.007, 0.007, 0.006, 0.006, 0.005, 0.005, 0.005, 0.005, 0.004
+Radiant to Convective Decay Curves for Heating,SPACE5-1,SB51,-173.526,-140.261,-115.134,537.298,-77.399,-27.782,-18.460,-19.794,-22.473,-24.076,-24.463,-23.955,-22.975,-21.671,-20.238,-18.790,-17.393,-16.080,-14.868,-13.759,-12.750,-11.835,-11.005,-10.252,-9.569,-8.947,-8.434,-7.958,-2146.740,-422.821,-3328.384,-629.151,175.488,-3060.095,-420.390,280.577
+Radiant to Convective Decay Curves for Heating,SPACE5-1,SB52,-199.019,-157.843,-127.328,489.425,-224.991,-178.755,-136.792,-104.523,-81.030,-64.053,-51.742,-42.691,-35.991,-30.845,-26.808,-23.572,-20.929,-18.733,-16.883,-15.305,-13.945,-12.763,-11.727,-10.814,-10.003,-9.280,-8.685,-8.144,-2106.012,-305.171,-3250.697,-522.404,232.192,-2978.424,-377.031,353.744
+Radiant to Convective Decay Curves for Heating,SPACE5-1,SB53,-166.761,-135.563,-111.820,528.912,-114.104,-66.075,-48.428,-41.120,-37.095,-33.966,-31.141,-28.489,-26.086,-23.836,-21.769,-19.892,-18.200,-16.683,-15.326,-14.112,-13.026,-12.053,-11.179,-10.392,-9.682,-9.039,-8.509,-8.020,-2146.503,-421.799,-3326.907,-626.878,178.119,-3056.824,-416.939,284.539
+Radiant to Convective Decay Curves for Heating,SPACE5-1,SB54,-173.329,-139.783,-114.475,498.847,-217.690,-173.170,-132.548,-101.279,-78.526,-62.096,-50.196,-41.457,-34.996,-30.037,-26.147,-23.029,-20.481,-18.362,-16.576,-15.050,-13.733,-12.586,-11.580,-10.690,-9.900,-9.194,-8.614,-8.084,-2133.313,-371.337,-3270.584,-567.904,229.546,-3010.372,-370.199,328.694
+Radiant to Convective Decay Curves for Heating,SPACE5-1,F5-1,-57.424,-48.950,-41.755,193.488,-35.799,-29.773,-25.144,-21.478,-18.441,-15.879,-13.712,-11.877,-10.330,-9.010,-7.884,-6.923,-6.101,-5.397,-4.792,-4.271,-3.822,-3.433,-3.095,-2.801,-2.544,-2.320,-2.126,-1.957,-1129.389,-771.627,-1953.201,-1011.102,-550.623,-1832.099,-920.661,-512.144
+Radiant to Convective Decay Curves for Heating,SPACE5-1,C5-1,-270.799,-243.887,-220.019,512.496,-200.294,-172.852,-155.411,-142.623,-132.504,-122.946,-114.334,-106.551,-100.072,-93.720,-87.890,-82.538,-77.613,-73.074,-68.878,-64.990,-61.380,-58.019,-54.885,-51.955,-49.212,-46.640,-44.625,-42.559,-2507.835,-699.975,-4104.578,320.596,-284.536,-3960.869,430.080,-229.611
+! <Zone Sizing Information>, Zone Name, Load Type, Calc Des Load {W}, User Des Load {W}, Calc Des Air Flow Rate {m3/s}, User Des Air Flow Rate {m3/s}, Design Day Name, Date/Time of Peak, Temperature at Peak {C}, Humidity Ratio at Peak {kgWater/kgDryAir}, Floor Area {m2}, # Occupants, Calc Outdoor Air Flow Rate {m3/s}, Calc DOAS Heat Addition Rate {W}
+ Zone Sizing Information, SPACE1-1, Cooling, 2503.60734, 2503.60734, 0.20768, 0.20768, CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB, 7/21 16:00:00, 30.85800, 1.46151E-002, 99.16000, 11.00000, 5.62038E-002, 0.00000
+ Zone Sizing Information, SPACE1-1, Heating, 7103.48358, 7103.48358, 0.21447, 0.21447, CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB, 1/21 02:30:00, -17.30000, 8.38927E-004, 99.16000, 11.00000, 5.62038E-002, 0.00000
+ Zone Sizing Information, SPACE2-1, Cooling, 2227.22056, 2227.22056, 0.18474, 0.18474, CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB, 7/21 11:15:00, 29.30650, 1.46123E-002, 42.73500, 5.00000, 2.48342E-002, 0.00000
+ Zone Sizing Information, SPACE2-1, Heating, 3181.70451, 3181.70451, 9.64825E-002, 9.64825E-002, CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB, 1/21 02:30:00, -17.30000, 8.38927E-004, 42.73500, 5.00000, 2.48342E-002, 0.00000
+ Zone Sizing Information, SPACE3-1, Cooling, 3142.41697, 3142.41697, 0.26067, 0.26067, CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB, 7/21 10:15:00, 27.83525, 1.46096E-002, 96.48000, 11.00000, 5.53864E-002, 0.00000
+ Zone Sizing Information, SPACE3-1, Heating, 6995.85253, 6995.85253, 0.21110, 0.21110, CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB, 1/21 02:30:00, -17.30000, 8.38927E-004, 96.48000, 11.00000, 5.53864E-002, 0.00000
+ Zone Sizing Information, SPACE4-1, Cooling, 2323.97378, 2323.97378, 0.19277, 0.19277, CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB, 7/21 18:15:00, 28.53075, 1.46109E-002, 42.73500, 5.00000, 2.48342E-002, 0.00000
+ Zone Sizing Information, SPACE4-1, Heating, 3186.67974, 3186.67974, 9.66254E-002, 9.66254E-002, CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB, 1/21 02:30:00, -17.30000, 8.38927E-004, 42.73500, 5.00000, 2.48342E-002, 0.00000
+ Zone Sizing Information, SPACE5-1, Cooling, 2550.18170, 2550.18170, 0.21153, 0.21153, CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB, 7/21 15:00:00, 31.50000, 1.46163E-002, 182.49000, 20.00000, 0.10286, 0.00000
+ Zone Sizing Information, SPACE5-1, Heating, 7121.67827, 7121.67827, 0.21582, 0.21582, CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB, 1/21 02:45:00, -17.30000, 8.38927E-004, 182.49000, 20.00000, 0.10286, 0.00000
+! <System Sizing Information>, System Name, Load Type, Peak Load Kind, User Design Capacity [W], Calc Des Air Flow Rate [m3/s], User Des Air Flow Rate [m3/s], Design Day Name, Date/Time of Peak
+ System Sizing Information, VAV SYS 1, Cooling, Sensible, 16931.47, 1.05739, 1.05739, CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB, 7/21 15:00:00
+ System Sizing Information, VAV SYS 1, Heating, Sensible, 6761.87, 0.83449, 0.83449, CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB, 1/21 00:30:00
+! <Component Sizing Information>, Component Type, Component Name, Input Field Description, Value
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE1-1 VAV REHEAT, Design Size Maximum Air Flow Rate [m3/s], 0.21447
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE1-1 VAV REHEAT, Design Size Constant Minimum Air Flow Fraction, 0.35231
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE1-1 VAV REHEAT, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE1-1 VAV REHEAT, Design Size Minimum Air Flow Rate [m3/s], 6.43401E-002
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE1-1 VAV REHEAT, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 6.48852E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE1-1 VAV REHEAT, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE1-1 VAV REHEAT, Design Size Maximum Reheat Water Flow Rate [m3/s], 2.02032E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE1-1 VAV REHEAT, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 0.21447
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE1-1 VAV REHEAT, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.70000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE1-1 VAV REHEAT, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, SPACE1-1 ZONE COIL, Design Size Rated Capacity [W], 9144.28026
+ Component Sizing Information, Coil:Heating:Water, SPACE1-1 ZONE COIL, Design Size Maximum Water Flow Rate [m3/s], 2.02032E-004
+ Component Sizing Information, Coil:Heating:Water, SPACE1-1 ZONE COIL, Design Size U-Factor Times Area Value [W/K], 230.68503
+! <Water Heating Coil Capacity Information>,Component Type,Name,Nominal Total Capacity {W}
+Water Heating Coil Capacity Information,Coil:Heating:Water,SPACE1-1 ZONE COIL,4756.33
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE2-1 VAV REHEAT, Design Size Maximum Air Flow Rate [m3/s], 0.18474
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE2-1 VAV REHEAT, Design Size Constant Minimum Air Flow Fraction, 0.20000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE2-1 VAV REHEAT, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE2-1 VAV REHEAT, Design Size Minimum Air Flow Rate [m3/s], 5.54229E-002
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE2-1 VAV REHEAT, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 1.29690E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE2-1 VAV REHEAT, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE2-1 VAV REHEAT, Design Size Maximum Reheat Water Flow Rate [m3/s], 9.05645E-005
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE2-1 VAV REHEAT, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 9.64825E-002
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE2-1 VAV REHEAT, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.70000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE2-1 VAV REHEAT, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, SPACE2-1 ZONE COIL, Design Size Rated Capacity [W], 4099.09304
+ Component Sizing Information, Coil:Heating:Water, SPACE2-1 ZONE COIL, Design Size Maximum Water Flow Rate [m3/s], 9.05645E-005
+ Component Sizing Information, Coil:Heating:Water, SPACE2-1 ZONE COIL, Design Size U-Factor Times Area Value [W/K], 103.21267
+Water Heating Coil Capacity Information,Coil:Heating:Water,SPACE2-1 ZONE COIL,3276.24
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE3-1 VAV REHEAT, Design Size Maximum Air Flow Rate [m3/s], 0.26067
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE3-1 VAV REHEAT, Design Size Constant Minimum Air Flow Fraction, 0.28204
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE3-1 VAV REHEAT, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE3-1 VAV REHEAT, Design Size Minimum Air Flow Rate [m3/s], 7.82004E-002
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE3-1 VAV REHEAT, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 8.10535E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE3-1 VAV REHEAT, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE3-1 VAV REHEAT, Design Size Maximum Reheat Water Flow Rate [m3/s], 1.98974E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE3-1 VAV REHEAT, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 0.21110
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE3-1 VAV REHEAT, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.70000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE3-1 VAV REHEAT, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, SPACE3-1 ZONE COIL, Design Size Rated Capacity [W], 9005.87677
+ Component Sizing Information, Coil:Heating:Water, SPACE3-1 ZONE COIL, Design Size Maximum Water Flow Rate [m3/s], 1.98974E-004
+ Component Sizing Information, Coil:Heating:Water, SPACE3-1 ZONE COIL, Design Size U-Factor Times Area Value [W/K], 227.26200
+Water Heating Coil Capacity Information,Coil:Heating:Water,SPACE3-1 ZONE COIL,5489.26
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE4-1 VAV REHEAT, Design Size Maximum Air Flow Rate [m3/s], 0.19277
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE4-1 VAV REHEAT, Design Size Constant Minimum Air Flow Fraction, 0.20000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE4-1 VAV REHEAT, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE4-1 VAV REHEAT, Design Size Minimum Air Flow Rate [m3/s], 5.78311E-002
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE4-1 VAV REHEAT, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 1.35325E-003
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE4-1 VAV REHEAT, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE4-1 VAV REHEAT, Design Size Maximum Reheat Water Flow Rate [m3/s], 9.07028E-005
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE4-1 VAV REHEAT, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 9.66254E-002
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE4-1 VAV REHEAT, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.70000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE4-1 VAV REHEAT, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, SPACE4-1 ZONE COIL, Design Size Rated Capacity [W], 4105.35586
+ Component Sizing Information, Coil:Heating:Water, SPACE4-1 ZONE COIL, Design Size Maximum Water Flow Rate [m3/s], 9.07028E-005
+ Component Sizing Information, Coil:Heating:Water, SPACE4-1 ZONE COIL, Design Size U-Factor Times Area Value [W/K], 103.37295
+Water Heating Coil Capacity Information,Coil:Heating:Water,SPACE4-1 ZONE COIL,3350.70
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE5-1 VAV REHEAT, Design Size Maximum Air Flow Rate [m3/s], 0.21582
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE5-1 VAV REHEAT, Design Size Constant Minimum Air Flow Fraction, 0.64433
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE5-1 VAV REHEAT, User-Specified Constant Minimum Air Flow Fraction, 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE5-1 VAV REHEAT, Design Size Minimum Air Flow Rate [m3/s], 6.47449E-002
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE5-1 VAV REHEAT, Design Size Maximum Flow per Zone Floor Area during Reheat [m3/s-m2], 3.54786E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE5-1 VAV REHEAT, Design Size Maximum Flow Fraction during Reheat [], 0.30000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE5-1 VAV REHEAT, Design Size Maximum Reheat Water Flow Rate [m3/s], 2.03887E-004
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE5-1 VAV REHEAT, Design Size Reheat Coil Sizing Air Volume Flow Rate [m3/s], 0.21582
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE5-1 VAV REHEAT, Design Size Reheat Coil Sizing Inlet Air Temperature [C], 16.70000
+ Component Sizing Information, AirTerminal:SingleDuct:VAV:Reheat, SPACE5-1 VAV REHEAT, Design Size Reheat Coil Sizing Inlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Heating:Water, SPACE5-1 ZONE COIL, Design Size Rated Capacity [W], 9228.26336
+ Component Sizing Information, Coil:Heating:Water, SPACE5-1 ZONE COIL, Design Size Maximum Water Flow Rate [m3/s], 2.03887E-004
+ Component Sizing Information, Coil:Heating:Water, SPACE5-1 ZONE COIL, Design Size U-Factor Times Area Value [W/K], 233.16204
+Water Heating Coil Capacity Information,Coil:Heating:Water,SPACE5-1 ZONE COIL,4790.39
+ Component Sizing Information, AirLoopHVAC, VAV SYS 1, Sum of Air Terminal Maximum Heating Flow Rates [m3/s], 0.32054
+ Component Sizing Information, AirLoopHVAC, VAV SYS 1, Sum of Air Terminal Minimum Heating Flow Rates [m3/s], 0.32054
+ Component Sizing Information, AirLoopHVAC, VAV SYS 1, Sum of Air Terminal Maximum Flow Rates [m3/s], 1.06846
+ Component Sizing Information, AirLoopHVAC, VAV SYS 1, Adjusted Heating Design Air Flow Rate [m3/s], 0.83449
+ Component Sizing Information, AirLoopHVAC, VAV SYS 1, Adjusted Cooling Design Air Flow Rate [m3/s], 1.06846
+ Component Sizing Information, AirLoopHVAC, VAV SYS 1, Adjusted Main Design Air Flow Rate [m3/s], 1.06846
+ Component Sizing Information, AirLoopHVAC, VAV SYS 1, User Heating Air Flow Ratio [], 0.30000
+ Component Sizing Information, AirLoopHVAC, VAV SYS 1, Calculated Heating Air Flow Ratio [], 0.78102
+ Component Sizing Information, AirLoopHVAC, VAV SYS 1, Design Supply Air Flow Rate [m3/s], 1.06846
+ Component Sizing Information, Controller:OutdoorAir, OA CONTROLLER 1, Maximum Outdoor Air Flow Rate [m3/s], 1.06846
+ Component Sizing Information, Controller:OutdoorAir, OA CONTROLLER 1, Minimum Outdoor Air Flow Rate [m3/s], 0.26412
+ Component Sizing Information, Coil:Heating:Water, OA HEATING COIL 1, Design Size Rated Capacity [W], 6898.62952
+ Component Sizing Information, Coil:Heating:Water, OA HEATING COIL 1, Design Size Maximum Water Flow Rate [m3/s], 1.52417E-004
+ Component Sizing Information, Coil:Heating:Water, OA HEATING COIL 1, Design Size U-Factor Times Area Value [W/K], 85.76276
+Water Heating Coil Capacity Information,Coil:Heating:Water,OA HEATING COIL 1,4567.86
+ Component Sizing Information, Controller:WaterCoil, OA HC CONTROLLER 1, Maximum Actuated Flow [m3/s], 1.52417E-004
+ Component Sizing Information, Coil:Cooling:Water, OA COOLING COIL 1, Design Size Design Inlet Air Temperature [C], 29.54592
+ Component Sizing Information, Coil:Cooling:Water, OA COOLING COIL 1, Design Size Design Inlet Water Temperature [C], 7.00000
+ Component Sizing Information, Coil:Cooling:Water, OA COOLING COIL 1, Design Size Design Outlet Air Temperature [C], 11.00000
+ Component Sizing Information, Coil:Cooling:Water, OA COOLING COIL 1, Design Size Design Inlet Air Humidity Ratio [kgWater/kgDryAir], 1.46127E-002
+ Component Sizing Information, Coil:Cooling:Water, OA COOLING COIL 1, Design Size Design Outlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Cooling:Water, OA COOLING COIL 1, Design Size Design Coil Load [W], 11278.18680
+ Component Sizing Information, Coil:Cooling:Water, OA COOLING COIL 1, Design Size Design Water Flow Rate [m3/s], 1.34344E-003
+ Component Sizing Information, Coil:Cooling:Water, OA COOLING COIL 1, Design Size Design Air Flow Rate [m3/s], 0.26412
+! <Water Cooling Coil Capacity Information>,Component Type,Name,Nominal Total Capacity {W},Nominal Sensible Capacity {W},Nominal Latent Capacity {W},Nominal Sensible Heat Ratio, Nominal Coil UA Value {W/C}, Nominal Coil Surface Area {m2}
+Water Cooling Coil Capacity Information,Coil:Cooling:Water,OA COOLING COIL 1,8695.77,5556.88,3138.89,0.64,835.06,8.47
+ Component Sizing Information, Controller:WaterCoil, OA CC CONTROLLER 1, Maximum Actuated Flow [m3/s], 1.34344E-003
+ Component Sizing Information, Coil:Cooling:Water, MAIN COOLING COIL 1, Design Size Design Inlet Air Temperature [C], 21.56831
+ Component Sizing Information, Coil:Cooling:Water, MAIN COOLING COIL 1, Design Size Design Inlet Water Temperature [C], 7.00000
+ Component Sizing Information, Coil:Cooling:Water, MAIN COOLING COIL 1, Design Size Design Outlet Air Temperature [C], 12.09672
+ Component Sizing Information, Coil:Cooling:Water, MAIN COOLING COIL 1, Design Size Design Inlet Air Humidity Ratio [kgWater/kgDryAir], 9.31891E-003
+ Component Sizing Information, Coil:Cooling:Water, MAIN COOLING COIL 1, Design Size Design Outlet Air Humidity Ratio [kgWater/kgDryAir], 8.00000E-003
+ Component Sizing Information, Coil:Cooling:Water, MAIN COOLING COIL 1, Design Size Design Coil Load [W], 16574.11467
+ Component Sizing Information, Coil:Cooling:Water, MAIN COOLING COIL 1, Design Size Design Water Flow Rate [m3/s], 9.87142E-004
+ Component Sizing Information, Coil:Cooling:Water, MAIN COOLING COIL 1, Design Size Design Air Flow Rate [m3/s], 1.06846
+Water Cooling Coil Capacity Information,Coil:Cooling:Water,MAIN COOLING COIL 1,24232.46,17205.05,7027.41,0.71,2220.63,22.52
+ Component Sizing Information, Coil:Heating:Water, MAIN HEATING COIL 1, Design Size Rated Capacity [W], 3465.27281
+ Component Sizing Information, Coil:Heating:Water, MAIN HEATING COIL 1, Design Size Maximum Water Flow Rate [m3/s], 7.65610E-005
+ Component Sizing Information, Coil:Heating:Water, MAIN HEATING COIL 1, Design Size U-Factor Times Area Value [W/K], 55.93760
+Water Heating Coil Capacity Information,Coil:Heating:Water,MAIN HEATING COIL 1,3060.95
+ Component Sizing Information, Fan:VariableVolume, SUPPLY FAN 1, Design Size Maximum Flow Rate [m3/s], 1.06846
+ Component Sizing Information, Controller:WaterCoil, CENTRAL COOLING COIL CONTROLLER 1, Maximum Actuated Flow [m3/s], 9.87142E-004
+ Component Sizing Information, Controller:WaterCoil, CENTRAL HEATING COIL CONTROLLER 1, Maximum Actuated Flow [m3/s], 7.65610E-005
+ Component Sizing Information, PlantLoop, HOT WATER LOOP, Maximum Loop Flow Rate [m3/s], 1.01514E-003
+ Component Sizing Information, PlantLoop, HOT WATER LOOP, Plant Loop Volume [m3], 0.12182
+ Component Sizing Information, PlantLoop, HOT WATER LOOP, Design Supply Temperature [C], 82.00000
+ Component Sizing Information, PlantLoop, HOT WATER LOOP, Design Return Temperature [C], 71.00000
+ Component Sizing Information, PlantLoop, HOT WATER LOOP, Sizing option (Coincident/NonCoincident), 1.00000
+ Component Sizing Information, Pump:VariableSpeed, HW CIRC PUMP, Design Flow Rate [m3/s], 1.01514E-003
+ Component Sizing Information, Pump:VariableSpeed, HW CIRC PUMP, Design Power Consumption [W], 259.35468
+ Component Sizing Information, Boiler:HotWater, CENTRAL BOILER, Design Size Nominal Capacity [W], 45946.77162
+ Component Sizing Information, Boiler:HotWater, CENTRAL BOILER, Design Size Design Water Flow Rate [m3/s], 1.01514E-003
+ Component Sizing Information, PlantLoop, CHILLED WATER LOOP, Maximum Loop Flow Rate [m3/s], 2.33058E-003
+ Component Sizing Information, PlantLoop, CHILLED WATER LOOP, Plant Loop Volume [m3], 0.27967
+ Component Sizing Information, PlantLoop, CHILLED WATER LOOP, Design Supply Temperature [C], 7.00000
+ Component Sizing Information, PlantLoop, CHILLED WATER LOOP, Design Return Temperature [C], 3.00000
+ Component Sizing Information, PlantLoop, CHILLED WATER LOOP, Sizing option (Coincident/NonCoincident), 1.00000
+ Component Sizing Information, Pump:VariableSpeed, CW CIRC PUMP, Design Flow Rate [m3/s], 2.33058E-003
+ Component Sizing Information, Pump:VariableSpeed, CW CIRC PUMP, Design Power Consumption [W], 595.43382
+ Component Sizing Information, Chiller:Electric, CENTRAL CHILLER, Design Size Nominal Capacity [W], 39130.48826
+ Component Sizing Information, Chiller:Electric, CENTRAL CHILLER, Design Size Design Chilled Water Flow Rate [m3/s], 2.33058E-003
+ Component Sizing Information, Chiller:Electric, CENTRAL CHILLER, User-Specified Design Condenser Water Flow Rate [m3/s], 1.10000E-003
+! <Zone Surfaces>,Zone Name,# Surfaces
+! <Shading Surfaces>,Number of Shading Surfaces,# Surfaces
+! <HeatTransfer Surface>,Surface Name,Surface Class,Base Surface,Heat Transfer Algorithm,Construction,Nominal U (w/o film coefs) {W/m2-K},Nominal U (with film coefs) {W/m2-K},Solar Diffusing,Area (Net) {m2},Area (Gross) {m2},Area (Sunlit Calc) {m2},Azimuth {deg},Tilt {deg},~Width {m},~Height {m},Reveal {m},ExtBoundCondition,ExtConvCoeffCalc,IntConvCoeffCalc,SunExposure,WindExposure,ViewFactorToGround,ViewFactorToSky,ViewFactorToGround-IR,ViewFactorToSky-IR,#Sides
+! <Shading Surface>,Surface Name,Surface Class,Base Surface,Heat Transfer Algorithm,Transmittance Schedule,Min Schedule Value,Max Schedule Value,Solar Diffusing,Area (Net) {m2},Area (Gross) {m2},Area (Sunlit Calc) {m2},Azimuth {deg},Tilt {deg},~Width {m},~Height {m},Reveal {m},ExtBoundCondition,ExtConvCoeffCalc,IntConvCoeffCalc,SunExposure,WindExposure,ViewFactorToGround,ViewFactorToSky,ViewFactorToGround-IR,ViewFactorToSky-IR,#Sides
+! <Frame/Divider Surface>,Surface Name,Surface Class,Base Surface,Heat Transfer Algorithm,Construction,Nominal U (w/o film coefs) {W/m2-K},Nominal U (with film coefs) {W/m2-K},Solar Diffusing,Area (Net) {m2},Area (Gross) {m2},Area (Sunlit Calc) {m2},Azimuth {deg},Tilt {deg},~Width {m},~Height {m},Reveal {m}
+Shading Surfaces,Number of Shading Surfaces,4
+Shading Surface,MAIN SOUTH OVERHANG,Shading,FRONT-1,None,SHADETRANSSCH,0.00,0.00, ,25.74,25.74,25.74,210.00,180.00,19.80,1.30,,,,,,,,,,,4
+Shading Surface,Mir-MAIN SOUTH OVERHANG,Shading,FRONT-1,None,SHADETRANSSCH,0.00,0.00, ,25.74,25.74,25.74,30.00,0.00,19.80,1.30,,,,,,,,,,,4
+Shading Surface,SOUTH DOOR OVERHANG,Shading,FRONT-1,None,SHADETRANSSCH,0.00,0.00, ,6.20,6.20,6.20,210.00,180.00,3.10,2.00,,,,,,,,,,,4
+Shading Surface,Mir-SOUTH DOOR OVERHANG,Shading,FRONT-1,None,SHADETRANSSCH,0.00,0.00, ,6.20,6.20,6.20,30.00,0.00,3.10,2.00,,,,,,,,,,,4
+Zone Surfaces,PLENUM-1,10
+HeatTransfer Surface,WALL-1PF,Wall,,CTF - ConductionTransferFunction,WALL-1,0.408,0.384,,18.30,18.30,18.30,210.00,90.00,30.50,0.60,0.00,ExternalEnvironment,ASHRAESimple,ASHRAESimple,SunExposed,WindExposed,0.50,0.50,0.52,0.48,4
+HeatTransfer Surface,WALL-1PR,Wall,,CTF - ConductionTransferFunction,WALL-1,0.408,0.384,,9.12,9.12,9.12,120.00,90.00,15.20,0.60,0.00,ExternalEnvironment,ASHRAESimple,ASHRAESimple,SunExposed,WindExposed,0.50,0.50,0.50,0.50,4
+HeatTransfer Surface,WALL-1PB,Wall,,CTF - ConductionTransferFunction,WALL-1,0.408,0.384,,18.30,18.30,18.30,30.00,90.00,30.50,0.60,0.00,ExternalEnvironment,ASHRAESimple,ASHRAESimple,SunExposed,WindExposed,0.50,0.50,0.50,0.50,4
+HeatTransfer Surface,WALL-1PL,Wall,,CTF - ConductionTransferFunction,WALL-1,0.408,0.384,,9.12,9.12,9.12,300.00,90.00,15.20,0.60,0.00,ExternalEnvironment,ASHRAESimple,ASHRAESimple,SunExposed,WindExposed,0.50,0.50,0.50,0.50,4
+HeatTransfer Surface,C1-1P,Floor,,CTF - ConductionTransferFunction,CLNG-1,1.533,1.117,,99.16,99.16,99.16,30.00,180.00,30.50,5.23,0.00,C1-1,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.00,1.00,0.00,4
+HeatTransfer Surface,C2-1P,Floor,,CTF - ConductionTransferFunction,CLNG-1,1.533,1.117,,42.74,42.74,42.74,300.00,180.00,15.20,5.16,0.00,C2-1,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.00,1.00,0.00,4
+HeatTransfer Surface,C3-1P,Floor,,CTF - ConductionTransferFunction,CLNG-1,1.533,1.117,,96.48,96.48,96.48,74.22,180.00,5.16,23.10,0.00,C3-1,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.00,1.00,0.00,4
+HeatTransfer Surface,C4-1P,Floor,,CTF - ConductionTransferFunction,CLNG-1,1.533,1.117,,42.74,42.74,42.74,120.00,180.00,15.20,5.23,0.00,C4-1,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.00,1.00,0.00,4
+HeatTransfer Surface,C5-1P,Floor,,CTF - ConductionTransferFunction,CLNG-1,1.533,1.117,,182.49,182.49,182.49,30.00,180.00,23.10,7.90,0.00,C5-1,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.00,1.00,0.00,4
+HeatTransfer Surface,TOP-1,Roof,,CTF - ConductionTransferFunction,ROOF-1,0.282,0.268,,463.60,463.60,463.60,210.00,0.00,30.50,15.20,0.00,ExternalEnvironment,ASHRAESimple,ASHRAESimple,SunExposed,WindExposed,0.00,1.00,0.00,1.00,4
+Zone Surfaces,SPACE1-1,8
+HeatTransfer Surface,FRONT-1,Wall,,CTF - ConductionTransferFunction,WALL-1,0.408,0.384,,51.39,73.20,51.39,210.00,90.00,30.50,2.40,0.00,ExternalEnvironment,ASHRAESimple,ASHRAESimple,SunExposed,WindExposed,0.50,0.50,0.61,0.39,4
+HeatTransfer Surface,WF-1,Window,FRONT-1,Window5 Detailed Fenestration,DBL CLR 3MM/13MM AIR,N/A,2.720,No,16.56,16.56,16.56,210.00,90.00,13.80,1.20,0.00,ExternalEnvironment,ASHRAESimple,ASHRAESimple,SunExposed,WindExposed,0.50,0.50,0.78,0.22,4
+HeatTransfer Surface,DF-1,Window,FRONT-1,Window5 Detailed Fenestration,SGL GREY 3MM,N/A,5.894,No,5.25,5.25,5.25,210.00,90.00,2.50,2.10,0.00,ExternalEnvironment,ASHRAESimple,ASHRAESimple,SunExposed,WindExposed,0.50,0.50,0.66,0.34,4
+HeatTransfer Surface,SB12,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,12.56,12.56,12.56,75.00,90.00,5.23,2.40,0.00,SB21,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,SB14,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,12.56,12.56,12.56,345.00,90.00,5.23,2.40,0.00,SB41,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,SB15,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,55.44,55.44,55.44,30.00,90.00,23.10,2.40,0.00,SB51,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,F1-1,Floor,,CTF - ConductionTransferFunction,FLOOR-SLAB-1,12.894,3.119,,99.16,99.16,99.16,30.00,180.00,30.50,5.23,0.00,Ground,N/A-Ground,ASHRAESimple,NoSun,NoWind,0.00,0.00,1.00,0.00,4
+HeatTransfer Surface,C1-1,Roof,,CTF - ConductionTransferFunction,CLNG-1,1.533,1.189,,99.16,99.16,99.16,210.00,0.00,30.50,5.23,0.00,C1-1P,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,1.00,0.00,1.00,4
+Zone Surfaces,SPACE2-1,7
+HeatTransfer Surface,RIGHT-1,Wall,,CTF - ConductionTransferFunction,WALL-1,0.408,0.384,,27.36,36.48,27.36,120.00,90.00,15.20,2.40,0.00,ExternalEnvironment,ASHRAESimple,ASHRAESimple,SunExposed,WindExposed,0.50,0.50,0.50,0.50,4
+HeatTransfer Surface,WR-1,Window,RIGHT-1,Window5 Detailed Fenestration,DBL CLR 3MM/13MM AIR,N/A,2.720,No,9.12,9.12,9.12,120.00,90.00,7.60,1.20,0.00,ExternalEnvironment,ASHRAESimple,ASHRAESimple,SunExposed,WindExposed,0.50,0.50,0.50,0.50,4
+HeatTransfer Surface,SB21,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,12.56,12.56,12.56,255.00,90.00,5.23,2.40,0.00,SB12,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,SB23,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,12.39,12.39,12.39,345.78,90.00,5.16,2.40,0.00,SB32,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,SB25,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,18.96,18.96,18.96,300.00,90.00,7.90,2.40,0.00,SB52,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,F2-1,Floor,,CTF - ConductionTransferFunction,FLOOR-SLAB-1,12.894,3.119,,42.74,42.74,42.74,300.00,180.00,15.20,5.16,0.00,Ground,N/A-Ground,ASHRAESimple,NoSun,NoWind,0.00,0.00,1.00,0.00,4
+HeatTransfer Surface,C2-1,Roof,,CTF - ConductionTransferFunction,CLNG-1,1.533,1.189,,42.74,42.74,42.74,120.00,0.00,15.20,5.23,0.00,C2-1P,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,1.00,0.00,1.00,4
+Zone Surfaces,SPACE3-1,8
+HeatTransfer Surface,BACK-1,Wall,,CTF - ConductionTransferFunction,WALL-1,0.408,0.384,,52.35,73.20,52.35,30.00,90.00,30.50,2.40,0.00,ExternalEnvironment,ASHRAESimple,ASHRAESimple,SunExposed,WindExposed,0.50,0.50,0.50,0.50,4
+HeatTransfer Surface,WB-1,Window,BACK-1,Window5 Detailed Fenestration,DBL CLR 3MM/13MM AIR,N/A,2.720,No,16.44,16.44,16.44,30.00,90.00,13.70,1.20,0.00,ExternalEnvironment,ASHRAESimple,ASHRAESimple,SunExposed,WindExposed,0.50,0.50,0.50,0.50,4
+HeatTransfer Surface,DB-1,Window,BACK-1,Window5 Detailed Fenestration,SGL GREY 3MM,N/A,5.894,No,4.41,4.41,4.41,30.00,90.00,2.10,2.10,0.00,ExternalEnvironment,ASHRAESimple,ASHRAESimple,SunExposed,WindExposed,0.50,0.50,0.50,0.50,4
+HeatTransfer Surface,SB32,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,12.39,12.39,12.39,165.78,90.00,5.16,2.40,0.00,SB23,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,SB34,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,12.39,12.39,12.39,254.22,90.00,5.16,2.40,0.00,SB43,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,SB35,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,55.44,55.44,55.44,210.00,90.00,23.10,2.40,0.00,SB53,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,F3-1,Floor,,CTF - ConductionTransferFunction,FLOOR-SLAB-1,12.894,3.119,,96.48,96.48,96.48,74.22,180.00,5.16,23.10,0.00,Ground,N/A-Ground,ASHRAESimple,NoSun,NoWind,0.00,0.00,1.00,0.00,4
+HeatTransfer Surface,C3-1,Roof,,CTF - ConductionTransferFunction,CLNG-1,1.533,1.189,,96.48,96.48,96.48,254.22,0.00,5.16,30.50,0.00,C3-1P,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,1.00,0.00,1.00,4
+Zone Surfaces,SPACE4-1,7
+HeatTransfer Surface,LEFT-1,Wall,,CTF - ConductionTransferFunction,WALL-1,0.408,0.384,,27.36,36.48,27.36,300.00,90.00,15.20,2.40,0.00,ExternalEnvironment,ASHRAESimple,ASHRAESimple,SunExposed,WindExposed,0.50,0.50,0.50,0.50,4
+HeatTransfer Surface,WL-1,Window,LEFT-1,Window5 Detailed Fenestration,DBL CLR 3MM/13MM AIR,N/A,2.720,No,9.12,9.12,9.12,300.00,90.00,7.60,1.20,0.00,ExternalEnvironment,ASHRAESimple,ASHRAESimple,SunExposed,WindExposed,0.50,0.50,0.50,0.50,4
+HeatTransfer Surface,SB41,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,12.56,12.56,12.56,165.00,90.00,5.23,2.40,0.00,SB14,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,SB43,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,12.39,12.39,12.39,74.22,90.00,5.16,2.40,0.00,SB34,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,SB45,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,18.96,18.96,18.96,120.00,90.00,7.90,2.40,0.00,SB54,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,F4-1,Floor,,CTF - ConductionTransferFunction,FLOOR-SLAB-1,12.894,3.119,,42.74,42.74,42.74,120.00,180.00,15.20,5.23,0.00,Ground,N/A-Ground,ASHRAESimple,NoSun,NoWind,0.00,0.00,1.00,0.00,4
+HeatTransfer Surface,C4-1,Roof,,CTF - ConductionTransferFunction,CLNG-1,1.533,1.189,,42.74,42.74,42.74,300.00,0.00,15.20,5.16,0.00,C4-1P,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,1.00,0.00,1.00,4
+Zone Surfaces,SPACE5-1,6
+HeatTransfer Surface,SB51,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,55.44,55.44,55.44,210.00,90.00,23.10,2.40,0.00,SB15,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,SB52,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,18.96,18.96,18.96,120.00,90.00,7.90,2.40,0.00,SB25,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,SB53,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,55.44,55.44,55.44,30.00,90.00,23.10,2.40,0.00,SB35,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,SB54,Wall,,CTF - ConductionTransferFunction,INT-WALL-1,2.811,1.978,,18.96,18.96,18.96,300.00,90.00,7.90,2.40,0.00,SB45,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,0.50,0.50,0.50,4
+HeatTransfer Surface,F5-1,Floor,,CTF - ConductionTransferFunction,FLOOR-SLAB-1,12.894,3.119,,182.49,182.49,182.49,30.00,180.00,23.10,7.90,0.00,Ground,N/A-Ground,ASHRAESimple,NoSun,NoWind,0.00,0.00,1.00,0.00,4
+HeatTransfer Surface,C5-1,Roof,,CTF - ConductionTransferFunction,CLNG-1,1.533,1.189,,182.49,182.49,182.49,210.00,0.00,23.10,7.90,0.00,C5-1P,Other/Same Surface Int Conv,ASHRAESimple,NoSun,NoWind,0.00,1.00,0.00,1.00,4
+! <Environment>,Environment Name,Environment Type, Start Date, End Date, Start DayOfWeek, Duration {#days}, Source:Start DayOfWeek,  Use Daylight Saving, Use Holidays, Apply Weekend Holiday Rule,  Use Rain Values, Use Snow Values, Sky Temperature Model
+! <Environment:Special Days>, Special Day Name, Special Day Type, Source, Start Date, Duration {#days}
+! <Environment:Daylight Saving>, Daylight Saving Indicator, Source, Start Date, End Date
+! <Environment:WarmupDays>, NumberofWarmupDays
+Environment,RUN PERIOD 1,WeatherFileRunPeriod,01/01/2013,12/31/2013,Tuesday,365,Use RunPeriod Specified Day,Yes,Yes,No,Yes,Yes,Clark and Allen
+Environment:Daylight Saving,No,
