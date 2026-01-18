@@ -3,9 +3,10 @@ import numpy as np
 import threading
 import queue
 import sys
+import os
+import time
 from datetime import datetime, timedelta
 
-# --- CRITICAL: Point to your EnergyPlus ROOT folder ---
 energyplus_install_path = r'C:\EnergyPlus-24.1.0' 
 if energyplus_install_path not in sys.path:
     sys.path.insert(0, energyplus_install_path)
@@ -19,7 +20,10 @@ class EnergyPlusEnv(gym.Env):
         self.epw_path = epw_path
         self.output_dir = output_dir
 
-        self.observation_space = gym.spaces.Box(low=-50, high=2000, shape=(10,), dtype=np.float32)
+        # Observation: Time(3) + OutdoorTemp(1) + ZoneTemp(1) + Occ(1) + FutureOcc(2) = 8
+        self.observation_space = gym.spaces.Box(low=-50, high=2000, shape=(8,), dtype=np.float32)
+        
+        # Actions: Heating Setpoint (15C to 25C)
         self.action_space = gym.spaces.Discrete(11)
         self.action_map = np.linspace(15.0, 25.0, 11)
 
@@ -30,6 +34,7 @@ class EnergyPlusEnv(gym.Env):
         self.sim_thread = None
         self.sim_running = False
         self.episode_idx = 0
+        self.step_count = 0 
 
         self.handles = {}
         self.zone_names = ["SPACE1-1", "SPACE2-1", "SPACE3-1", "SPACE4-1", "SPACE5-1"]
@@ -39,7 +44,9 @@ class EnergyPlusEnv(gym.Env):
         self.stop_simulation()
         self.sim_running = True
         self.episode_idx += 1
-        
+        self.step_count = 0 
+        self.handles = {} 
+
         self.sim_thread = threading.Thread(target=self._run_energyplus)
         self.sim_thread.start()
 
@@ -71,6 +78,13 @@ class EnergyPlusEnv(gym.Env):
             return {}, 0, True, False, {}
 
         obs_dict, done, truncated, info = result
+        
+        # Force stop after 31 days (approx 3000 steps)
+        self.step_count += 1
+        if self.step_count >= 2976:
+            done = True
+            self.stop_simulation()
+
         reward = self._calculate_reward(info)
         return obs_dict, reward, done, truncated, info
 
@@ -93,7 +107,10 @@ class EnergyPlusEnv(gym.Env):
             self.ep_state, self._callback_step
         )
         self.api.runtime.set_console_output_status(self.ep_state, False)
-        args = ['-d', f"{self.output_dir}/ep_out_{self.episode_idx}", '-w', self.epw_path, self.idf_path]
+        
+        unique_output_dir = f"{self.output_dir}/ep_out_{self.episode_idx}_{int(time.time())}"
+        args = ['-d', unique_output_dir, '-w', self.epw_path, self.idf_path]
+        
         self.api.runtime.run_energyplus(self.ep_state, args)
         self.obs_queue.put(None)
 
@@ -103,20 +120,25 @@ class EnergyPlusEnv(gym.Env):
         if not self.handles:
             if not self._init_handles(state_arg): return
 
-        # FIX 2: Robust Time Handling
         current_dt, time_feats, weather_feats = self._get_global_features(state_arg)
 
         next_occ_map = self.occupancy_manager.get_next_occupancy(current_dt)
         self._apply_occupancy_schedules(state_arg, next_occ_map)
 
         obs_dict = {}
-        total_energy = 0.0
+        total_energy_joules = 0.0
         total_complaints = 0.0
 
         for zone in self.zone_names:
+            if self.handles['zones'][zone]['temp'] == -1: return
+
             z_temp = self.api.exchange.get_variable_value(state_arg, self.handles['zones'][zone]['temp'])
-            z_energy = self.api.exchange.get_variable_value(state_arg, self.handles['zones'][zone]['energy'])
-            total_energy += z_energy
+            
+            # Rate (Watts) to Energy (Joules) conversion
+            z_power_watts = self.api.exchange.get_variable_value(state_arg, self.handles['zones'][zone]['power'])
+            z_energy_joules = z_power_watts * 900.0 
+            
+            total_energy_joules += z_energy_joules
 
             occ_data = self.occupancy_manager.get_occupancy_state(zone, current_dt)
             curr_occ = occ_data['current']
@@ -124,11 +146,9 @@ class EnergyPlusEnv(gym.Env):
             total_complaints += complaint
 
             zone_features = np.array([z_temp, curr_occ, occ_data['next_1h'], occ_data['next_2h']], dtype=np.float32)
-            
-            # --- FIX: Correct variable name used here (weather_feats) ---
             obs_dict[zone] = np.concatenate([time_feats, weather_feats, zone_features])
 
-        info = {'energy': total_energy, 'complaint': total_complaints, 'time': current_dt}
+        info = {'energy': total_energy_joules, 'complaint': total_complaints, 'time': current_dt}
         self.obs_queue.put((obs_dict, False, False, info))
 
         try:
@@ -140,21 +160,39 @@ class EnergyPlusEnv(gym.Env):
 
     def _init_handles(self, state):
         if not self.api.exchange.api_data_fully_ready(state): return False
+        
         self.handles['actuators'] = {}
+        self.handles['cooling_actuators'] = {} # New handle list for safety
         self.handles['schedules'] = {}
         self.handles['zones'] = {}
-        self.handles['weather'] = {
-            'temp': self.api.exchange.get_variable_handle(state, "Site Outdoor Air Drybulb Temperature", "Environment"),
-            'direct_solar': self.api.exchange.get_variable_handle(state, "Site Direct Solar Radiation Rate per Area", "Environment"),
-            'diffuse_solar': self.api.exchange.get_variable_handle(state, "Site Diffuse Solar Radiation Rate per Area", "Environment"),
-        }
+        self.handles['weather'] = {}
+
+        # Weather
+        weather_name = "Site Outdoor Air Drybulb Temperature"
+        handle = self.api.exchange.get_variable_handle(state, weather_name, "Environment")
+        if handle == -1: return False
+        self.handles['weather']['temp'] = handle
+
         for zone in self.zone_names:
-            self.handles['actuators'][zone] = self.api.exchange.get_actuator_handle(state, "Zone Temperature Control", "Heating Setpoint", zone)
-            self.handles['schedules'][zone] = self.api.exchange.get_actuator_handle(state, "Schedule:Constant", "Schedule Value", f"OCC-SCHEDULE-{zone}")
-            self.handles['zones'][zone] = {
-                'temp': self.api.exchange.get_variable_handle(state, "Zone Air Temperature", zone),
-                'energy': self.api.exchange.get_variable_handle(state, "Zone Air System Sensible Heating Energy", zone)
-            }
+            # 1. Heating Setpoint (Controlled by Agent)
+            heat_handle = self.api.exchange.get_actuator_handle(state, "Zone Temperature Control", "Heating Setpoint", zone)
+            self.handles['actuators'][zone] = heat_handle
+            
+            # 2. Cooling Setpoint (Controlled by Safety Logic)
+            cool_handle = self.api.exchange.get_actuator_handle(state, "Zone Temperature Control", "Cooling Setpoint", zone)
+            self.handles['cooling_actuators'][zone] = cool_handle
+
+            # 3. Occupancy Schedule
+            sch_handle = self.api.exchange.get_actuator_handle(state, "Schedule:Constant", "Schedule Value", f"OCC-SCHEDULE-{zone}")
+            self.handles['schedules'][zone] = sch_handle
+
+            # 4. Sensors
+            t_handle = self.api.exchange.get_variable_handle(state, "Zone Air Temperature", zone)
+            p_handle = self.api.exchange.get_variable_handle(state, "Zone Air System Sensible Heating Rate", zone)
+            
+            if t_handle == -1 or p_handle == -1: return False
+            self.handles['zones'][zone] = {'temp': t_handle, 'power': p_handle}
+            
         return True
 
     def _get_global_features(self, state):
@@ -164,7 +202,6 @@ class EnergyPlusEnv(gym.Env):
         hour = self.api.exchange.hour(state)
         minute = self.api.exchange.minutes(state)
 
-        # FIX 3: Timedelta for robust time handling
         dt_base = datetime(year, month, day)
         current_dt = dt_base + timedelta(hours=hour, minutes=minute)
         
@@ -177,9 +214,7 @@ class EnergyPlusEnv(gym.Env):
         
         time_feats = np.array([min_of_day, day_of_week, cal_week], dtype=np.float32)
         out_temp = self.api.exchange.get_variable_value(state, self.handles['weather']['temp'])
-        dir_solar = self.api.exchange.get_variable_value(state, self.handles['weather']['direct_solar'])
-        dif_solar = self.api.exchange.get_variable_value(state, self.handles['weather']['diffuse_solar'])
-        weather_feats = np.array([out_temp, dir_solar, dif_solar], dtype=np.float32)
+        weather_feats = np.array([out_temp], dtype=np.float32)
 
         return current_dt, time_feats, weather_feats
 
@@ -190,6 +225,15 @@ class EnergyPlusEnv(gym.Env):
 
     def _apply_actions(self, state, actions):
         for zone, act_idx in actions.items():
-            setpoint = self.action_map[act_idx]
-            handle = self.handles['actuators'].get(zone, -1)
-            if handle > -1: self.api.exchange.set_actuator_value(state, handle, setpoint)
+            # 1. Set Heating Setpoint (Agent Decision)
+            heating_setpoint = self.action_map[act_idx]
+            heat_handle = self.handles['actuators'].get(zone, -1)
+            if heat_handle > -1: 
+                self.api.exchange.set_actuator_value(state, heat_handle, heating_setpoint)
+
+            # 2. Set Cooling Setpoint (Safety Override)
+            # We force cooling to 30.0C. This ensures Heating (max 25) is ALWAYS < Cooling (30).
+            # This prevents the "Heating > Cooling" crash in Dual Setpoint mode.
+            cool_handle = self.handles['cooling_actuators'].get(zone, -1)
+            if cool_handle > -1:
+                self.api.exchange.set_actuator_value(state, cool_handle, 30.0)
