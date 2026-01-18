@@ -4,6 +4,7 @@ import threading
 import queue
 import sys
 import time
+import shutil
 from datetime import datetime, timedelta
 
 # --- POINT TO YOUR ENERGYPLUS INSTALLATION ---
@@ -23,7 +24,7 @@ class EnergyPlusEnv(gym.Env):
         # --- Paper 4.1: State Space (Size 10) ---
         self.observation_space = gym.spaces.Box(low=-50, high=2000, shape=(10,), dtype=np.float32)
         
-        # --- Paper 4.2: Action Space (15C to 25C in 1C steps) ---
+        # --- Paper 4.2: Action Space (15C to 25C) ---
         self.action_space = gym.spaces.Discrete(11)
         self.action_map = np.linspace(15.0, 25.0, 11)
 
@@ -43,19 +44,36 @@ class EnergyPlusEnv(gym.Env):
         self.l_clip = 5.0 
 
     def reset(self, seed=None, options=None):
+        # 1. Stop existing simulation
         self.stop_simulation()
+        
+        # 2. Clear any stale data in queues
+        with self.obs_queue.mutex:
+            self.obs_queue.queue.clear()
+        with self.act_queue.mutex:
+            self.act_queue.queue.clear()
+
         self.sim_running = True
         self.episode_idx += 1
         self.handles = {} 
         
+        # 3. Start Thread
         self.sim_thread = threading.Thread(target=self._run_energyplus)
         self.sim_thread.start()
 
+        # 4. Wait for first observation safely
         try:
-            obs_dict, info = self.obs_queue.get(timeout=20)
+            val = self.obs_queue.get(timeout=30)
         except queue.Empty:
-            raise RuntimeError("EnergyPlus failed to start.")
+            self.stop_simulation()
+            raise RuntimeError("EnergyPlus failed to start (Timeout).")
             
+        # 5. Handle Crash (NoneType error fix)
+        if val is None:
+            self.stop_simulation()
+            raise RuntimeError(f"EnergyPlus crashed immediately on Episode {self.episode_idx}. Check {self.output_dir} for .err logs.")
+
+        obs_dict, info = val
         return obs_dict, info
 
     def step(self, actions):
@@ -63,14 +81,14 @@ class EnergyPlusEnv(gym.Env):
         total_complaints = 0
         obs_dict = {}
         
-        # We loop 4 times (1 hour total)
+        # Paper: 1 RL step = 1 hour = 4 x 15min sim steps
         for _ in range(4):
             if not self.sim_running: break
             
             self.act_queue.put(actions)
             
             try:
-                result = self.obs_queue.get(timeout=5)
+                result = self.obs_queue.get(timeout=10)
                 if result is None: 
                     self.sim_running = False
                     break
@@ -83,6 +101,7 @@ class EnergyPlusEnv(gym.Env):
                 self.sim_running = False
                 break
 
+        # Reward Calculation
         e_kwh = total_energy / 3600000.0
         if e_kwh > self.l_clip:
             e_flat = (e_kwh - self.l_clip) * 0.1 + self.l_clip
@@ -96,24 +115,38 @@ class EnergyPlusEnv(gym.Env):
 
     def stop_simulation(self):
         self.sim_running = False
-        if self.sim_thread: self.sim_thread.join(timeout=2)
+        if self.sim_thread and self.sim_thread.is_alive():
+            self.sim_thread.join(timeout=3)
+        self.ep_state = None
 
     def _run_energyplus(self):
         self.ep_state = self.api.state_manager.new_state()
         self.api.runtime.callback_begin_zone_timestep_after_init_heat_balance(self.ep_state, self._callback_step)
         self.api.runtime.set_console_output_status(self.ep_state, False)
         
+        # FIX: Unique timestamp per episode avoids "Permission Denied" on Windows file locks
+        timestamp = int(time.time())
+        run_dir = f"{self.output_dir}/ep_out_{self.episode_idx}_{timestamp}"
+        
         args = [
-            '-d', f"{self.output_dir}/ep_{self.episode_idx}", 
+            '-d', run_dir, 
             '-w', self.epw_path, 
             '-r', 
             self.idf_path
         ]
-        self.api.runtime.run_energyplus(self.ep_state, args)
+        
+        # Capture exit code
+        exit_code = self.api.runtime.run_energyplus(self.ep_state, args)
+        
+        if exit_code != 0:
+            print(f"\n[Error] EnergyPlus Simulation ended with exit code: {exit_code}")
+        
         self.obs_queue.put(None) 
 
     def _callback_step(self, state_arg):
-        if not self.sim_running: return
+        if not self.sim_running: 
+            return
+
         if not self.handles: 
             if not self._init_handles(state_arg): return
 
@@ -144,9 +177,11 @@ class EnergyPlusEnv(gym.Env):
 
         # -- GET ACTION --
         try:
+            # Wait for action from Agent
             actions = self.act_queue.get(timeout=2)
             self._apply_actions(state_arg, actions)
         except queue.Empty:
+            # If agent is slow, default to keeping current setpoints (or do nothing)
             pass
 
     def _init_handles(self, state):
@@ -172,20 +207,17 @@ class EnergyPlusEnv(gym.Env):
         hour = self.api.exchange.hour(state)
         minute = self.api.exchange.minutes(state)
         
-        # --- FIX: ROBUST TIME HANDLING ---
-        # Instead of putting hour/minute directly into datetime(), 
-        # we add them to the start of the day. This safely handles "hour=24" or "minute=60"
+        # TIMEDELTA FIX for "Hour 24" or "Minute 60"
         dt_base = datetime(year, month, day)
         current_dt = dt_base + timedelta(hours=hour, minutes=minute)
         
-        # Recalculate discrete features from the clean object
         day_of_week = float(current_dt.weekday()) # 0-6
         min_of_day = float(current_dt.hour * 60 + current_dt.minute)
         cal_week = float(current_dt.isocalendar()[1])
 
         out_temp = self.api.exchange.get_variable_value(state, self.handles['weather']['temp'])
         
-        # Placeholders for Solar
+        # Solar Placeholders (Paper requires 10 inputs)
         direct_solar = 0.0 
         indirect_solar = 0.0 
 
@@ -204,4 +236,5 @@ class EnergyPlusEnv(gym.Env):
             setpoint = self.action_map[idx]
             if self.handles['actuators'].get(z, -1) > -1:
                 self.api.exchange.set_actuator_value(state, self.handles['actuators'][z], setpoint)
+                # Safety Gap
                 self.api.exchange.set_actuator_value(state, self.handles['cool_act'][z], 30.0)
